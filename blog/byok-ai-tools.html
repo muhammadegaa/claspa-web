@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BYOK AI Tools: Why Smart Users Bring Their Own API Key — Claspa</title>
+  <meta name="description" content="BYOK (bring your own key) AI tools give you transparency, control, and real savings. Here's how the model works and why it beats subscription AI for most users.">
+  <meta name="theme-color" content="#0d0d19">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239d94f5' stroke-width='2'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .blog-hero {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 120px 24px 48px;
+    }
+    .blog-hero .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--tx3);
+      margin-bottom: 20px;
+    }
+    .post-meta .tag {
+      background: rgba(124,111,247,0.08);
+      border: 1px solid rgba(124,111,247,0.15);
+      color: #a99ef5;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .blog-hero h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+    .blog-hero .lede {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--tx2);
+    }
+    .blog-post {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    .blog-post h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      margin: 48px 0 16px;
+      color: var(--tx);
+    }
+    .blog-post p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--tx2);
+      margin-bottom: 20px;
+    }
+    .blog-post ul, .blog-post ol {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+    .blog-post li {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--tx2);
+      margin-bottom: 8px;
+    }
+    .blog-post strong {
+      color: var(--tx);
+      font-weight: 600;
+    }
+    .callout {
+      background: var(--sf);
+      border: 1px solid rgba(124,111,247,0.2);
+      border-left: 3px solid var(--ac);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 32px 0;
+    }
+    .callout p { margin-bottom: 0; }
+    .vs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 32px 0;
+    }
+    .vs-card {
+      background: var(--sf);
+      border: 1px solid var(--bd);
+      border-radius: 12px;
+      padding: 22px 20px;
+    }
+    .vs-card.byok {
+      border-color: rgba(124,111,247,0.25);
+      background: linear-gradient(180deg, rgba(124,111,247,0.05) 0%, var(--sf) 80%);
+    }
+    .vs-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+    .vs-label.sub { color: #f59e0b; }
+    .vs-label.byok { color: var(--ac); }
+    .vs-card ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+    .vs-card li {
+      font-size: 14px;
+      color: var(--tx2);
+      margin-bottom: 6px;
+    }
+    .cost-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+    .cost-table th {
+      text-align: left;
+      padding: 10px 14px;
+      background: var(--sf);
+      color: var(--tx3);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid var(--bd2);
+    }
+    .cost-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--bd);
+      color: var(--tx2);
+      vertical-align: top;
+    }
+    .cost-table tr:last-child td { border-bottom: none; }
+    .cost-table .highlight td { color: var(--tx); }
+    .cost-table .highlight td:first-child { font-weight: 600; }
+    .cost-highlight {
+      color: var(--ok);
+      font-weight: 600;
+    }
+    .divider {
+      border: none;
+      border-top: 1px solid var(--bd);
+      margin: 48px 0;
+    }
+    .cta-box {
+      background: linear-gradient(135deg, rgba(124,111,247,0.07), rgba(91,138,245,0.07));
+      border: 1px solid rgba(124,111,247,0.2);
+      border-radius: 14px;
+      padding: 36px 32px;
+      text-align: center;
+      margin: 48px 0;
+    }
+    .cta-box h3 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      margin-bottom: 10px;
+    }
+    .cta-box p {
+      font-size: 15px;
+      color: var(--tx2);
+      margin-bottom: 24px;
+    }
+    .flow-steps {
+      counter-reset: flow;
+      list-style: none;
+      padding: 0;
+      margin: 24px 0;
+    }
+    .flow-steps li {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--bd);
+      counter-increment: flow;
+    }
+    .flow-steps li:last-child { border-bottom: none; }
+    .flow-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(124,111,247,0.1);
+      border: 1px solid rgba(124,111,247,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #a99ef5;
+      flex-shrink: 0;
+    }
+    .flow-text {
+      font-size: 15px;
+      color: var(--tx2);
+      line-height: 1.6;
+    }
+    .flow-text strong {
+      color: var(--tx);
+      display: block;
+      margin-bottom: 3px;
+    }
+    @media (max-width: 600px) {
+      .blog-hero { padding: 100px 20px 36px; }
+      .blog-post { padding: 0 20px 60px; }
+      .vs-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9d94f5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+        <span>Claspa</span>
+      </a>
+      <div class="nav-links">
+        <a href="/#features">Features</a>
+        <a href="/#how-it-works">How it works</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/#pricing" class="btn btn-sm">Get Claspa</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Blog Hero -->
+  <div class="blog-hero">
+    <div class="post-meta">
+      <span class="tag">AI & Tech</span>
+      <span>April 10, 2026</span>
+      <span>·</span>
+      <span>7 min read</span>
+    </div>
+    <h1>BYOK AI tools: why smart users bring their own API key</h1>
+    <p class="lede">A growing number of apps let you plug in your own AI key instead of paying for a bundled AI subscription. Here's why that model is often smarter — and when it isn't.</p>
+  </div>
+
+  <!-- Article -->
+  <article class="blog-post">
+
+    <p>You've probably run into apps that charge you $20/month and include "AI-powered" features as part of the deal. The AI is embedded, invisible, and you pay for it whether you use it or not.</p>
+
+    <p>BYOK — bring your own key — flips that model. The tool is the tool. The AI is yours to source and pay for separately. It sounds like more work upfront. For many users, it ends up being simpler and cheaper.</p>
+
+    <h2>What BYOK actually means</h2>
+
+    <p>When an app supports BYOK, it means you provide an API key from an AI provider — OpenAI, Anthropic, Google, or an aggregator like OpenRouter — and the app uses that key to run AI requests on your behalf. The app doesn't supply the AI; it just knows how to talk to it.</p>
+
+    <p>Your key, your account, your billing. The app company never touches your AI spend. They charge separately for the software itself.</p>
+
+    <p>This is fundamentally different from apps where the AI is bundled in. In those products, the company buys AI capacity in bulk and sells it to you at a markup — or subsidizes it up to a point and throttles you when you hit limits.</p>
+
+    <div class="callout">
+      <p><strong>OpenRouter</strong> is a popular aggregator for BYOK setups. It lets you access models from Anthropic, OpenAI, Google, Meta, and others under one API key, with unified pricing and billing. Many BYOK apps point users there specifically because it simplifies model selection.</p>
+    </div>
+
+    <h2>Subscription AI vs. BYOK — the real tradeoffs</h2>
+
+    <div class="vs-grid">
+      <div class="vs-card">
+        <div class="vs-label sub">Subscription AI (bundled)</div>
+        <ul>
+          <li>One flat monthly fee</li>
+          <li>No setup required</li>
+          <li>Often rate-limited or throttled</li>
+          <li>You pay for the ceiling, not the usage</li>
+          <li>Company controls which model you get</li>
+          <li>Price goes up when AI costs go up</li>
+          <li>Features may degrade on lower tiers</li>
+        </ul>
+      </div>
+      <div class="vs-card byok">
+        <div class="vs-label byok">BYOK (bring your own key)</div>
+        <ul>
+          <li>Pay per token — only for what you use</li>
+          <li>Requires one-time API key setup</li>
+          <li>No artificial rate limits</li>
+          <li>Transparent costs you can audit</li>
+          <li>Choose your own model</li>
+          <li>AI costs shift with market rates</li>
+          <li>Tool price stays separate from AI price</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>Neither model is strictly better. The right one depends on how much you use the tool and how much you value control over what's happening under the hood.</p>
+
+    <h2>When BYOK saves you real money</h2>
+
+    <p>The math favors BYOK for users who are light-to-moderate AI consumers. Heavy users who are running thousands of requests per month may actually find bundled subscriptions cheaper — the per-token costs can add up if you're running large prompts constantly.</p>
+
+    <p>For a typical online learner using an AI note-taking tool, the usage pattern looks more like this:</p>
+
+    <ul>
+      <li>2 to 5 lectures per session</li>
+      <li>Each transcript: roughly 2,000 to 5,000 tokens</li>
+      <li>One AI call per lecture for note generation</li>
+      <li>A handful of quiz questions generated on pause</li>
+    </ul>
+
+    <p>At current OpenRouter pricing for capable mid-range models (Google Gemini Flash, Claude Haiku, and comparable options), a full hour of lecture processing typically costs a few cents. A heavy month — 20+ hours of course material — might run $1 to $3 in AI spend.</p>
+
+    <table class="cost-table">
+      <thead>
+        <tr>
+          <th>Scenario</th>
+          <th>Bundled AI app</th>
+          <th>BYOK (OpenRouter)</th>
+          <th>Monthly savings</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Light user (5 hrs/mo)</td>
+          <td>$15–20/mo</td>
+          <td>~$0.25 in AI + tool cost</td>
+          <td class="cost-highlight">~$14–19</td>
+        </tr>
+        <tr>
+          <td>Moderate user (20 hrs/mo)</td>
+          <td>$15–20/mo</td>
+          <td>~$1.50 in AI + tool cost</td>
+          <td class="cost-highlight">~$13–18</td>
+        </tr>
+        <tr class="highlight">
+          <td>Heavy user (80+ hrs/mo)</td>
+          <td>$20/mo (may throttle)</td>
+          <td>~$6–10 in AI + tool cost</td>
+          <td class="cost-highlight">~$10–14</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The numbers above are estimates based on mid-2026 OpenRouter model pricing. Actual costs depend on which model you choose — cheaper models cost less per token, premium models cost more. With BYOK, you pick.</p>
+
+    <h2>The model transparency argument</h2>
+
+    <p>Cost is one reason to prefer BYOK. Model transparency is another — and arguably more important for power users.</p>
+
+    <p>When an app bundles AI, they typically route requests to whatever model is cheapest for them at any given moment. You might think you're getting Claude or GPT-4, but there's no guarantee you aren't being served a smaller, cheaper model on routine tasks. Some apps disclose this. Most don't.</p>
+
+    <p>With BYOK, you choose the model explicitly. You can use a fast, cheap model for routine note generation and a more capable model for complex synthesis or quiz generation. The decision is yours, and the cost reflects it directly.</p>
+
+    <p>For learners who care about output quality — and if you're using AI to generate notes you're going to study from, you should — this kind of control matters.</p>
+
+    <h2>The one real downside of BYOK</h2>
+
+    <p>Setup friction. You need an account with an AI provider, a credit card on file, and an API key. For technical users, this takes about three minutes. For users who've never touched an API before, it can feel like a barrier.</p>
+
+    <p>That friction is real and shouldn't be dismissed. Bundled AI products earn their premium partly by removing this step entirely. If you want to open an app and have AI features work immediately with no configuration, bundled is genuinely more convenient.</p>
+
+    <p>The question is whether that convenience is worth $15 to $20 per month on top of whatever the tool itself costs. For most moderate-use cases, the honest answer is no — not once you've done the setup once.</p>
+
+    <h2>How Claspa uses the BYOK model</h2>
+
+    <p>Claspa separates the tool from the AI cleanly. You pay $9 one-time (or $3/month for Pro features) for the extension itself — transcript capture, note generation, quizzing, spaced repetition, cross-lecture connections. That's the software.</p>
+
+    <p>The AI runs on your OpenRouter key. You pick the model, you see the cost, you control the spend. If AI prices drop — and they've dropped substantially over the past two years — your costs drop automatically. Claspa doesn't need to update anything. Your bill just gets cheaper.</p>
+
+    <p>Here's how setup works in practice:</p>
+
+    <ol class="flow-steps">
+      <li>
+        <span class="flow-num">1</span>
+        <div class="flow-text"><strong>Create an OpenRouter account</strong> openrouter.ai — free to sign up, pay-as-you-go billing. Add $5 credit to start, which covers weeks of typical use.</div>
+      </li>
+      <li>
+        <span class="flow-num">2</span>
+        <div class="flow-text"><strong>Copy your API key</strong> Available in your OpenRouter dashboard. One key works for every model on the platform.</div>
+      </li>
+      <li>
+        <span class="flow-num">3</span>
+        <div class="flow-text"><strong>Paste it into Claspa</strong> Open the Claspa extension, go to settings, paste your key. Done. Takes about 30 seconds.</div>
+      </li>
+      <li>
+        <span class="flow-num">4</span>
+        <div class="flow-text"><strong>Choose your model</strong> Claspa recommends a default (good balance of speed, quality, and cost). You can switch anytime.</div>
+      </li>
+    </ol>
+
+    <p>After that, every AI call runs through your account. You can log into OpenRouter at any time and see exactly how many tokens were used, which model was called, and what it cost. Full transparency, line by line.</p>
+
+    <h2>Is BYOK right for you?</h2>
+
+    <p>If you use AI tools occasionally and want zero friction, bundled AI products are probably fine. The premium is worth the simplicity.</p>
+
+    <p>If you use multiple AI-powered tools, or you're the type of person who wants to understand what's happening inside the products you use, BYOK makes a lot of sense. The setup overhead is front-loaded and small. The ongoing benefits — lower cost, model flexibility, transparent billing — compound over time.</p>
+
+    <p>For Udemy learners specifically, the math is fairly clear. Claspa's one-time cost is $9. Your typical AI spend for a full course might be $0.50 to $2. That's a flat total in the range of $10 to $11 to have AI-powered notes and spaced repetition for an entire course. Compare that to a $15 to $20/month subscription to a tool that may throttle you mid-course or quietly downgrade the model it's using.</p>
+
+    <p>BYOK isn't a niche developer preference anymore. It's just a smarter way to pay for AI.</p>
+
+    <div class="cta-box">
+      <h3>The tool. Your AI key. Full control.</h3>
+      <p>Claspa charges for the software, not the inference. Bring your own OpenRouter key and pay only for what you use — usually cents per lecture.</p>
+      <a href="https://claspa.app/#pricing" class="btn btn-lg">Get Claspa — $9 one-time</a>
+    </div>
+
+    <hr class="divider">
+
+    <p style="font-size:14px; color: var(--tx3);">Related: <a href="udemy-notes.html" style="color: var(--ac);">How to take better notes on Udemy without typing</a> · <a href="forget-online-courses.html" style="color: var(--ac);">Why you forget 90% of online courses</a></p>
+
+  </article>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <a href="/" class="logo">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9d94f5" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span>Claspa</span>
+        </a>
+        <p>AI-powered learning buddy for Udemy courses.</p>
+      </div>
+      <div class="footer-links">
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="index.html">Blog</a>
+        <a href="mailto:support@claspa.app">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

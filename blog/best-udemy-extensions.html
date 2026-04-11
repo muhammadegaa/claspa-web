@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Best Udemy Chrome Extensions for 2026 — Claspa</title>
+  <meta name="description" content="The best Udemy Chrome extensions in 2026, ranked honestly. From AI note-takers to speed controllers — here's what's actually worth installing.">
+  <meta name="theme-color" content="#0d0d19">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239d94f5' stroke-width='2'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .blog-hero {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 120px 24px 48px;
+    }
+    .blog-hero .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--tx3);
+      margin-bottom: 20px;
+    }
+    .post-meta .tag {
+      background: rgba(124,111,247,0.08);
+      border: 1px solid rgba(124,111,247,0.15);
+      color: #a99ef5;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .blog-hero h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+    .blog-hero .lede {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--tx2);
+    }
+    .blog-post {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    .blog-post h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      margin: 48px 0 16px;
+      color: var(--tx);
+    }
+    .blog-post p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--tx2);
+      margin-bottom: 20px;
+    }
+    .blog-post ul, .blog-post ol {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+    .blog-post li {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--tx2);
+      margin-bottom: 8px;
+    }
+    .blog-post strong {
+      color: var(--tx);
+      font-weight: 600;
+    }
+    .ext-card {
+      background: var(--sf);
+      border: 1px solid var(--bd);
+      border-radius: 14px;
+      padding: 28px 28px 24px;
+      margin: 32px 0;
+    }
+    .ext-card.featured {
+      border-color: rgba(124,111,247,0.3);
+      background: linear-gradient(180deg, rgba(124,111,247,0.05) 0%, var(--sf) 60%);
+    }
+    .ext-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      gap: 16px;
+    }
+    .ext-rank {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--ac);
+      margin-bottom: 4px;
+    }
+    .ext-name {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--tx);
+    }
+    .ext-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: linear-gradient(135deg, #6d63e8, #4f7df0);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 100px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .ext-desc {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--tx2);
+      margin-bottom: 16px;
+    }
+    .ext-meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .ext-meta-item {
+      font-size: 13px;
+      color: var(--tx3);
+    }
+    .ext-meta-item strong {
+      color: var(--tx2);
+      font-weight: 600;
+    }
+    .ext-pros-cons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .pros, .cons {
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .pros-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--ok);
+      margin-bottom: 8px;
+    }
+    .cons-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #f59e0b;
+      margin-bottom: 8px;
+    }
+    .pros ul, .cons ul {
+      padding-left: 16px;
+      margin: 0;
+    }
+    .pros li, .cons li {
+      font-size: 13px;
+      color: var(--tx2);
+      margin-bottom: 4px;
+    }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 32px 0;
+      font-size: 14px;
+    }
+    .comparison-table th {
+      text-align: left;
+      padding: 10px 14px;
+      background: var(--sf);
+      color: var(--tx3);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid var(--bd2);
+    }
+    .comparison-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--bd);
+      color: var(--tx2);
+      vertical-align: top;
+    }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .comparison-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .check { color: var(--ok); font-weight: 700; }
+    .cross { color: rgba(255,255,255,0.25); }
+    .divider {
+      border: none;
+      border-top: 1px solid var(--bd);
+      margin: 48px 0;
+    }
+    .cta-box {
+      background: linear-gradient(135deg, rgba(124,111,247,0.07), rgba(91,138,245,0.07));
+      border: 1px solid rgba(124,111,247,0.2);
+      border-radius: 14px;
+      padding: 36px 32px;
+      text-align: center;
+      margin: 48px 0;
+    }
+    .cta-box h3 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      margin-bottom: 10px;
+    }
+    .cta-box p {
+      font-size: 15px;
+      color: var(--tx2);
+      margin-bottom: 24px;
+    }
+    @media (max-width: 600px) {
+      .blog-hero { padding: 100px 20px 36px; }
+      .blog-post { padding: 0 20px 60px; }
+      .ext-pros-cons { grid-template-columns: 1fr; }
+      .ext-header { flex-direction: column; }
+      .comparison-table { font-size: 13px; }
+      .comparison-table th, .comparison-table td { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9d94f5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+        <span>Claspa</span>
+      </a>
+      <div class="nav-links">
+        <a href="/#features">Features</a>
+        <a href="/#how-it-works">How it works</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/#pricing" class="btn btn-sm">Get Claspa</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Blog Hero -->
+  <div class="blog-hero">
+    <div class="post-meta">
+      <span class="tag">Tools & Extensions</span>
+      <span>April 10, 2026</span>
+      <span>·</span>
+      <span>9 min read</span>
+    </div>
+    <h1>Best Udemy Chrome extensions for 2026</h1>
+    <p class="lede">The right extension turns a passive video-watching session into something that actually sticks. Here are the tools worth installing — ranked honestly, with real tradeoffs noted.</p>
+  </div>
+
+  <!-- Article -->
+  <article class="blog-post">
+
+    <p>Udemy's built-in player is fine. Notes, transcripts, Q&amp;A — it covers the basics. But "fine" isn't the same as "optimized for learning." The right Udemy Chrome extension can automate the tedious parts, test your comprehension, and make sure you actually retain the material you paid for.</p>
+
+    <p>This list focuses on tools that do something genuinely useful. No bloat, no vague "productivity" extensions that add a sidebar and call it a day. Each one earns its spot on your toolbar.</p>
+
+    <!-- Quick comparison table -->
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Extension</th>
+          <th>AI notes</th>
+          <th>Quizzes</th>
+          <th>Spaced rep.</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Claspa</strong></td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td>$9 one-time / $3 mo</td>
+        </tr>
+        <tr>
+          <td>NoteGPT</td>
+          <td class="check">✓</td>
+          <td class="cross">—</td>
+          <td class="cross">—</td>
+          <td>Free / $9.99 mo</td>
+        </tr>
+        <tr>
+          <td>HoverNotes</td>
+          <td class="cross">—</td>
+          <td class="cross">—</td>
+          <td class="cross">—</td>
+          <td>Free</td>
+        </tr>
+        <tr>
+          <td>Beastnotes</td>
+          <td class="check">✓</td>
+          <td class="cross">—</td>
+          <td class="cross">—</td>
+          <td>Subscription</td>
+        </tr>
+        <tr>
+          <td>Video Speed Controller</td>
+          <td class="cross">—</td>
+          <td class="cross">—</td>
+          <td class="cross">—</td>
+          <td>Free</td>
+        </tr>
+        <tr>
+          <td>Udemy Subtitles</td>
+          <td class="cross">—</td>
+          <td class="cross">—</td>
+          <td class="cross">—</td>
+          <td>Free</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- #1 Claspa -->
+    <div class="ext-card featured">
+      <div class="ext-header">
+        <div>
+          <div class="ext-rank">#1 Best overall</div>
+          <div class="ext-name">Claspa</div>
+        </div>
+        <span class="ext-badge">Editor's pick</span>
+      </div>
+      <p class="ext-desc">Claspa is the only extension on this list built specifically around the full learning loop — not just capture, but comprehension and retention. It reads your Udemy transcript automatically, generates AI notes on demand, quizzes you when you pause, and runs spaced repetition on every concept in the background. The Pro tier also surfaces cross-lecture connections, which is genuinely useful once you're a few weeks into a longer course.</p>
+      <p class="ext-desc">The pricing model is worth a mention. Claspa charges for the tool ($9 one-time or $3/month) and you bring your own API key via OpenRouter. That means your AI costs are transparent and yours to control. No mystery "AI credits" burning out mid-course.</p>
+      <div class="ext-pros-cons">
+        <div class="pros">
+          <div class="pros-label">Strengths</div>
+          <ul>
+            <li>Full learning loop in one tool</li>
+            <li>Automatic transcript capture</li>
+            <li>On-pause quiz generation</li>
+            <li>SM-2 spaced repetition built in</li>
+            <li>One-time pricing option</li>
+            <li>BYOK — you control AI costs</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <div class="cons-label">Worth knowing</div>
+          <ul>
+            <li>Requires an OpenRouter API key</li>
+            <li>Udemy-only (no YouTube, Coursera)</li>
+            <li>Cross-lecture features need Pro</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ext-meta" style="margin-top:20px">
+        <div class="ext-meta-item">Price: <strong>$9 one-time or $3/month</strong></div>
+        <div class="ext-meta-item">Best for: <strong>Serious Udemy learners</strong></div>
+        <div class="ext-meta-item"><a href="https://claspa.app" style="color: var(--ac);">claspa.app →</a></div>
+      </div>
+    </div>
+
+    <!-- #2 NoteGPT -->
+    <div class="ext-card">
+      <div class="ext-header">
+        <div>
+          <div class="ext-rank">#2 Best for quick summaries</div>
+          <div class="ext-name">NoteGPT</div>
+        </div>
+      </div>
+      <p class="ext-desc">NoteGPT works across YouTube, Udemy and other video platforms. Its main function is generating AI summaries from video transcripts. The free tier is limited in how many summaries you can run per month, and the paid plan sits at roughly $9.99/month. The notes are decent — clean enough to be useful. But there's no quiz layer, no spaced repetition, and no retention tracking. It captures, and that's it.</p>
+      <div class="ext-pros-cons">
+        <div class="pros">
+          <div class="pros-label">Strengths</div>
+          <ul>
+            <li>Works on YouTube and Udemy</li>
+            <li>Clean summary output</li>
+            <li>Free tier available</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <div class="cons-label">Worth knowing</div>
+          <ul>
+            <li>No retention features</li>
+            <li>Monthly subscription model</li>
+            <li>Free tier is limited</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ext-meta" style="margin-top:20px">
+        <div class="ext-meta-item">Price: <strong>Free / ~$9.99/month</strong></div>
+        <div class="ext-meta-item">Best for: <strong>Quick video summaries across platforms</strong></div>
+      </div>
+    </div>
+
+    <!-- #3 Beastnotes -->
+    <div class="ext-card">
+      <div class="ext-header">
+        <div>
+          <div class="ext-rank">#3 Best note export</div>
+          <div class="ext-name">Beastnotes</div>
+        </div>
+      </div>
+      <p class="ext-desc">Beastnotes positions itself as an AI note-taker for online courses with a focus on export and organization. You get AI-generated notes from transcripts and some export options that make it easier to pull content into Notion or other tools. The retention story is thin — there's no quiz or review system. Good choice if your workflow involves exporting notes somewhere else for review.</p>
+      <div class="ext-pros-cons">
+        <div class="pros">
+          <div class="pros-label">Strengths</div>
+          <ul>
+            <li>Good export formatting</li>
+            <li>Notion-friendly output</li>
+            <li>AI note generation</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <div class="cons-label">Worth knowing</div>
+          <ul>
+            <li>Subscription pricing</li>
+            <li>No quizzing or spaced rep.</li>
+            <li>Newer, smaller user base</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ext-meta" style="margin-top:20px">
+        <div class="ext-meta-item">Price: <strong>Subscription (varies)</strong></div>
+        <div class="ext-meta-item">Best for: <strong>Learners who review notes in Notion</strong></div>
+      </div>
+    </div>
+
+    <!-- #4 HoverNotes -->
+    <div class="ext-card">
+      <div class="ext-header">
+        <div>
+          <div class="ext-rank">#4 Best free option</div>
+          <div class="ext-name">HoverNotes</div>
+        </div>
+      </div>
+      <p class="ext-desc">HoverNotes is a lightweight free extension that lets you create timestamped notes while watching Udemy videos. No AI, no automation — just a cleaner interface for manual note-taking. It stores your notes alongside the course and links them back to the video timestamp so you can jump to the exact moment. Genuinely useful if you prefer manual notes and just want them organized better than a blank doc.</p>
+      <div class="ext-pros-cons">
+        <div class="pros">
+          <div class="pros-label">Strengths</div>
+          <ul>
+            <li>Completely free</li>
+            <li>Timestamped notes</li>
+            <li>No account required</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <div class="cons-label">Worth knowing</div>
+          <ul>
+            <li>No AI features</li>
+            <li>Manual note-taking only</li>
+            <li>No retention tools</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ext-meta" style="margin-top:20px">
+        <div class="ext-meta-item">Price: <strong>Free</strong></div>
+        <div class="ext-meta-item">Best for: <strong>Manual note-takers who want timestamps</strong></div>
+      </div>
+    </div>
+
+    <!-- #5 Video Speed Controller -->
+    <div class="ext-card">
+      <div class="ext-header">
+        <div>
+          <div class="ext-rank">#5 Best utility extension</div>
+          <div class="ext-name">Video Speed Controller</div>
+        </div>
+      </div>
+      <p class="ext-desc">Not an AI tool, not a note-taker. But Video Speed Controller belongs on this list because it's on almost every serious learner's toolbar for good reason. It adds fine-grained playback speed controls to HTML5 video — including Udemy — via keyboard shortcuts. Want 1.4x? 1.8x? 0.7x for dense technical content? Done. Udemy's native speed control is coarse. This fixes it.</p>
+      <div class="ext-pros-cons">
+        <div class="pros">
+          <div class="pros-label">Strengths</div>
+          <ul>
+            <li>Free and lightweight</li>
+            <li>Keyboard shortcuts for speed</li>
+            <li>Works on any HTML5 video</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <div class="cons-label">Worth knowing</div>
+          <ul>
+            <li>No learning features at all</li>
+            <li>Pure utility</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ext-meta" style="margin-top:20px">
+        <div class="ext-meta-item">Price: <strong>Free</strong></div>
+        <div class="ext-meta-item">Best for: <strong>Adjusting playback speed precisely</strong></div>
+      </div>
+    </div>
+
+    <h2>How to choose the right one</h2>
+
+    <p>The honest answer depends on what you're trying to solve.</p>
+
+    <p>If you're losing time to manual note-taking and not retaining much anyway, you want something in the AI notes + retention category. That's Claspa. If you just want a quick summary you can skim after a lecture, NoteGPT or Beastnotes will do the job at a lower commitment level. And if your real problem is just watching too slowly, Video Speed Controller costs nothing and installs in 10 seconds.</p>
+
+    <p>The extensions in categories 2 and 3 are good at the capture step. The gap shows up later — when you realize you've filled three Notion pages with AI summaries you never actually reviewed.</p>
+
+    <p>Retention is the metric that matters. Not notes saved. Not lectures completed. Retention.</p>
+
+    <div class="cta-box">
+      <h3>The full learning loop in one extension</h3>
+      <p>Claspa auto-captures transcripts, generates structured notes, quizzes you on pause, and tracks your mastery with spaced repetition. $9 one-time — yours forever.</p>
+      <a href="https://claspa.app/#pricing" class="btn btn-lg">Try Claspa</a>
+    </div>
+
+    <hr class="divider">
+
+    <p style="font-size:14px; color: var(--tx3);">Related: <a href="udemy-notes.html" style="color: var(--ac);">How to take better notes on Udemy without typing</a> · <a href="forget-online-courses.html" style="color: var(--ac);">Why you forget 90% of online courses</a></p>
+
+  </article>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <a href="/" class="logo">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9d94f5" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span>Claspa</span>
+        </a>
+        <p>AI-powered learning buddy for Udemy courses.</p>
+      </div>
+      <div class="footer-links">
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="index.html">Blog</a>
+        <a href="mailto:support@claspa.app">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

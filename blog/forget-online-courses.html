@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why You Forget 90% of Online Courses (and How to Fix It) — Claspa</title>
+  <meta name="description" content="The forgetting curve is brutal. Most online learners lose 90% of new material within a week. Here's the science behind why — and how spaced repetition fixes it.">
+  <meta name="theme-color" content="#0d0d19">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239d94f5' stroke-width='2'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .blog-hero {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 120px 24px 48px;
+    }
+    .blog-hero .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--tx3);
+      margin-bottom: 20px;
+    }
+    .post-meta .tag {
+      background: rgba(124,111,247,0.08);
+      border: 1px solid rgba(124,111,247,0.15);
+      color: #a99ef5;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .blog-hero h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+    .blog-hero .lede {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--tx2);
+    }
+    .blog-post {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    .blog-post h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      margin: 48px 0 16px;
+      color: var(--tx);
+    }
+    .blog-post p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--tx2);
+      margin-bottom: 20px;
+    }
+    .blog-post ul, .blog-post ol {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+    .blog-post li {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--tx2);
+      margin-bottom: 8px;
+    }
+    .blog-post strong {
+      color: var(--tx);
+      font-weight: 600;
+    }
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 32px 0;
+    }
+    .stat-box {
+      background: var(--sf);
+      border: 1px solid var(--bd);
+      border-radius: 12px;
+      padding: 20px 18px;
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, #7c6ff7, #5b8af5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--tx3);
+      line-height: 1.4;
+    }
+    .curve-visual {
+      background: var(--sf);
+      border: 1px solid var(--bd);
+      border-radius: 12px;
+      padding: 28px 24px;
+      margin: 32px 0;
+    }
+    .curve-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--tx3);
+      margin-bottom: 20px;
+    }
+    .curve-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .curve-label {
+      font-size: 12px;
+      color: var(--tx3);
+      width: 80px;
+      flex-shrink: 0;
+    }
+    .curve-bar-wrap {
+      flex: 1;
+      background: rgba(255,255,255,0.04);
+      border-radius: 4px;
+      height: 20px;
+      overflow: hidden;
+    }
+    .curve-bar {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #7c6ff7, #5b8af5);
+      display: flex;
+      align-items: center;
+      padding-right: 8px;
+      justify-content: flex-end;
+      transition: width 0.6s ease;
+    }
+    .curve-bar-pct {
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.85);
+    }
+    .callout {
+      background: var(--sf);
+      border: 1px solid rgba(124,111,247,0.2);
+      border-left: 3px solid var(--ac);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 32px 0;
+    }
+    .callout p { margin-bottom: 0; }
+    .method-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+    .method-table th {
+      text-align: left;
+      padding: 10px 14px;
+      background: var(--sf);
+      color: var(--tx3);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid var(--bd2);
+    }
+    .method-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--bd);
+      color: var(--tx2);
+    }
+    .method-table tr:last-child td { border-bottom: none; }
+    .rating-good { color: var(--ok); font-weight: 600; }
+    .rating-mid { color: #f59e0b; font-weight: 600; }
+    .rating-bad { color: #ef4444; font-weight: 600; }
+    .divider {
+      border: none;
+      border-top: 1px solid var(--bd);
+      margin: 48px 0;
+    }
+    .cta-box {
+      background: linear-gradient(135deg, rgba(124,111,247,0.07), rgba(91,138,245,0.07));
+      border: 1px solid rgba(124,111,247,0.2);
+      border-radius: 14px;
+      padding: 36px 32px;
+      text-align: center;
+      margin: 48px 0;
+    }
+    .cta-box h3 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      margin-bottom: 10px;
+    }
+    .cta-box p {
+      font-size: 15px;
+      color: var(--tx2);
+      margin-bottom: 24px;
+    }
+    @media (max-width: 600px) {
+      .blog-hero { padding: 100px 20px 36px; }
+      .blog-post { padding: 0 20px 60px; }
+      .stat-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9d94f5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+        <span>Claspa</span>
+      </a>
+      <div class="nav-links">
+        <a href="/#features">Features</a>
+        <a href="/#how-it-works">How it works</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/#pricing" class="btn btn-sm">Get Claspa</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Blog Hero -->
+  <div class="blog-hero">
+    <div class="post-meta">
+      <span class="tag">Learning Science</span>
+      <span>April 10, 2026</span>
+      <span>·</span>
+      <span>8 min read</span>
+    </div>
+    <h1>Why you forget 90% of online courses (and how to fix it)</h1>
+    <p class="lede">You finish a course. You feel good. Six weeks later, you can barely recall what it was about. This isn't a memory problem — it's a system problem. And there's a fix.</p>
+  </div>
+
+  <!-- Article -->
+  <article class="blog-post">
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="stat-num">90%</div>
+        <div class="stat-label">of new information forgotten within a week without review</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">50%</div>
+        <div class="stat-label">forgotten within the first hour of learning</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">6%</div>
+        <div class="stat-label">of Udemy students complete the courses they start</div>
+      </div>
+    </div>
+
+    <h2>The forgetting curve is older than the internet</h2>
+
+    <p>In 1885, a German psychologist named Hermann Ebbinghaus sat down and memorized lists of nonsense syllables. Then he tested himself. Then he waited, tested again, and charted how fast his recall decayed.</p>
+
+    <p>What he found was uncomfortable. Without any reinforcement, he forgot roughly 40% of new material within 20 minutes. After a day, he retained less than a third. After a week, around 25%. The decay wasn't gradual — it was steep, fast, and predictable.</p>
+
+    <p>A hundred and forty years later, every modern study on memory confirms the same basic shape. Your brain treats unused information as clutter and clears it out. Fast.</p>
+
+    <!-- Forgetting curve visual -->
+    <div class="curve-visual">
+      <div class="curve-title">Ebbinghaus forgetting curve — retention without review</div>
+      <div class="curve-bar-row">
+        <div class="curve-label">Immediately</div>
+        <div class="curve-bar-wrap"><div class="curve-bar" style="width:100%"><span class="curve-bar-pct">100%</span></div></div>
+      </div>
+      <div class="curve-bar-row">
+        <div class="curve-label">20 minutes</div>
+        <div class="curve-bar-wrap"><div class="curve-bar" style="width:58%"><span class="curve-bar-pct">58%</span></div></div>
+      </div>
+      <div class="curve-bar-row">
+        <div class="curve-label">1 hour</div>
+        <div class="curve-bar-wrap"><div class="curve-bar" style="width:44%"><span class="curve-bar-pct">44%</span></div></div>
+      </div>
+      <div class="curve-bar-row">
+        <div class="curve-label">1 day</div>
+        <div class="curve-bar-wrap"><div class="curve-bar" style="width:33%"><span class="curve-bar-pct">33%</span></div></div>
+      </div>
+      <div class="curve-bar-row">
+        <div class="curve-label">1 week</div>
+        <div class="curve-bar-wrap"><div class="curve-bar" style="width:25%"><span class="curve-bar-pct">25%</span></div></div>
+      </div>
+      <div class="curve-bar-row">
+        <div class="curve-label">1 month</div>
+        <div class="curve-bar-wrap"><div class="curve-bar" style="width:21%"><span class="curve-bar-pct">21%</span></div></div>
+      </div>
+    </div>
+
+    <p>Online learning makes this worse, not better. When you read a textbook, you physically interact with the pages. When you attend a class, social accountability keeps you engaged. When you watch a Udemy lecture, you're lying on a couch, half-distracted, hitting play on something that feels a lot like Netflix.</p>
+
+    <p>Passive consumption is comfortable. It's also nearly useless for long-term retention.</p>
+
+    <h2>Why most "learning" strategies don't actually work</h2>
+
+    <p>Most people try to solve the retention problem with one of three strategies — and most of those strategies are less effective than people believe.</p>
+
+    <table class="method-table">
+      <thead>
+        <tr>
+          <th>Strategy</th>
+          <th>What people think</th>
+          <th>What research says</th>
+          <th>Effectiveness</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Re-watching lectures</strong></td>
+          <td>More exposure = more memory</td>
+          <td>Familiarity feels like memory but isn't</td>
+          <td class="rating-bad">Low</td>
+        </tr>
+        <tr>
+          <td><strong>Highlighting notes</strong></td>
+          <td>Important points are marked</td>
+          <td>Passive; doesn't require recall</td>
+          <td class="rating-bad">Low</td>
+        </tr>
+        <tr>
+          <td><strong>Re-reading notes</strong></td>
+          <td>Reviewing reinforces memory</td>
+          <td>Recognition vs. recall — different things</td>
+          <td class="rating-mid">Medium</td>
+        </tr>
+        <tr>
+          <td><strong>Practice testing</strong></td>
+          <td>Testing is for exams, not learning</td>
+          <td>Retrieval practice is highly effective</td>
+          <td class="rating-good">High</td>
+        </tr>
+        <tr>
+          <td><strong>Spaced repetition</strong></td>
+          <td>Complicated flashcard system</td>
+          <td>Most effective method for long-term recall</td>
+          <td class="rating-good">Very high</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Re-watching a lecture feels productive. Your brain recognizes the content and that recognition creates a warm feeling of familiarity. But recognition is not recall. Recognition is "I've seen this before." Recall is "I can reconstruct this from scratch." Only recall actually reflects learning.</p>
+
+    <div class="callout">
+      <p><strong>The testing effect:</strong> Studies consistently show that attempting to recall information — even if you get it wrong — strengthens memory significantly more than re-reading the same material. Getting an answer wrong and then seeing the correct answer is particularly powerful.</p>
+    </div>
+
+    <h2>What spaced repetition actually does</h2>
+
+    <p>Spaced repetition solves the forgetting curve by working with it instead of against it. The idea is simple: review a concept just before you'd naturally forget it. Each successful recall pushes the next review date further out. Eventually, the concept is in long-term memory and needs only occasional reinforcement to stay there.</p>
+
+    <p>The most widely used algorithm for this is SM-2, developed by Piotr Wozniak in the late 1980s. Anki, the popular flashcard app, runs on a version of SM-2. So does Claspa.</p>
+
+    <p>Here's what the review schedule looks like for a typical concept:</p>
+
+    <ul>
+      <li>First review: 1 day after learning</li>
+      <li>Second review: 3 days later</li>
+      <li>Third review: 8 days later</li>
+      <li>Fourth review: 21 days later</li>
+      <li>And so on — intervals grow with each successful recall</li>
+    </ul>
+
+    <p>The catch with Anki and most spaced repetition tools is that someone has to make the cards. You have to stop, write out the question and answer, add it to the deck. For a 10-lecture course, that's an hour of setup before you even start reviewing. Most people skip it.</p>
+
+    <h2>Why most learners never fix their retention problem</h2>
+
+    <p>The tools exist. Anki has been around since 2006. The science has been clear for decades. Yet most online learners still watch, feel like they learned something, and forget most of it within a week.</p>
+
+    <p>The gap is friction. Every extra step between "I just watched a lecture" and "this concept is being reinforced at the right interval" is a place where the system breaks down.</p>
+
+    <p>Creating Anki cards from scratch. Writing your own quiz questions. Remembering to actually open the review app. It's not that these things are hard. It's that they require consistent execution on top of an already-demanding learning habit. Life gets in the way.</p>
+
+    <p>The only version of spaced repetition that works reliably for online learners is one that requires nothing extra from them.</p>
+
+    <h2>What automatic spaced repetition looks like in practice</h2>
+
+    <p>Claspa is built around this exact problem. When you watch a Udemy lecture, it captures the transcript and generates structured notes automatically. Those notes become the raw material for a quiz when you pause the video — questions generated from the actual content, not generic flashcards.</p>
+
+    <p>Your response to each question feeds into an SM-2 scoring system. Concepts you know well get scheduled further out. Concepts you're shaky on come back sooner. The whole thing runs in the background — you don't manage a deck, you don't decide what to review, and you don't have to remember to open a separate app.</p>
+
+    <p>When you return to a course after a few days, Claspa primes you with a short review of what the algorithm says needs attention. Before you've even hit play on the next lecture, you've already reinforced three concepts from two lectures ago.</p>
+
+    <p>That's the difference between a tool and a system. The tool gives you notes. The system makes sure those notes actually produce knowledge you can use.</p>
+
+    <div class="cta-box">
+      <h3>Spaced repetition that runs itself</h3>
+      <p>Claspa captures your Udemy lectures, quizzes you when you pause, and tracks every concept with SM-2. No decks to build. No app to remember. It just works.</p>
+      <a href="https://claspa.app/#pricing" class="btn btn-lg">Get Claspa — from $9</a>
+    </div>
+
+    <h2>What you can do right now, tool or no tool</h2>
+
+    <p>If you want to improve your course retention starting today, three habits will move the needle:</p>
+
+    <p><strong>Test yourself, don't re-read.</strong> After every lecture, close your notes and write down everything you remember. Then check what you missed. The act of trying to recall — even imperfectly — strengthens the memory far more than another pass through the content.</p>
+
+    <p><strong>Space your sessions.</strong> Watching three hours of a course in one sitting feels efficient but produces poor retention. Two one-hour sessions with a day between them will leave you with measurably more. Distributed practice consistently outperforms massed practice in the research.</p>
+
+    <p><strong>Explain it to someone.</strong> The Feynman Technique works because teaching something forces you to locate every gap in your understanding. Even explaining a concept out loud to yourself — or to an imaginary listener — is significantly more effective than passive review.</p>
+
+    <p>The bottom line is straightforward. Forgetting is not a personal failure. It's what your brain does by default. Retention requires deliberate effort, timed correctly. The sooner that effort becomes automatic rather than manual, the more of what you learn will actually stay with you.</p>
+
+    <hr class="divider">
+
+    <p style="font-size:14px; color: var(--tx3);">Related: <a href="udemy-notes.html" style="color: var(--ac);">How to take better notes on Udemy without typing</a> · <a href="best-udemy-extensions.html" style="color: var(--ac);">Best Udemy Chrome extensions for 2026</a></p>
+
+  </article>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <a href="/" class="logo">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9d94f5" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span>Claspa</span>
+        </a>
+        <p>AI-powered learning buddy for Udemy courses.</p>
+      </div>
+      <div class="footer-links">
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="index.html">Blog</a>
+        <a href="mailto:support@claspa.app">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
