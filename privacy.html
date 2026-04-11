@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — CoNote</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .legal { max-width: 680px; margin: 0 auto; padding: 120px 24px 80px; }
+    .legal h1 { font-size: 32px; font-weight: 800; margin-bottom: 8px; letter-spacing: -1px; }
+    .legal .updated { font-size: 13px; color: var(--tx3); margin-bottom: 40px; }
+    .legal h2 { font-size: 18px; font-weight: 700; margin: 32px 0 12px; }
+    .legal p, .legal li { font-size: 15px; line-height: 1.7; color: var(--tx2); margin-bottom: 12px; }
+    .legal ul { padding-left: 20px; margin-bottom: 16px; }
+    .legal li { margin-bottom: 6px; }
+    .legal strong { color: var(--tx); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9d94f5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+        </svg>
+        <span>CoNote</span>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="legal">
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: April 11, 2026</p>
+
+    <h2>What CoNote does</h2>
+    <p>CoNote is a Chrome extension that helps you take notes on Udemy courses. It reads lecture transcripts from the Udemy page you're viewing and uses AI to generate structured notes, quizzes, and summaries.</p>
+
+    <h2>Data we collect</h2>
+    <p><strong>We do not collect any personal data.</strong> CoNote has no user accounts, no analytics, and no tracking. We do not know who you are or what courses you take.</p>
+
+    <h2>Data stored locally</h2>
+    <p>All your data is stored locally on your device using Chrome's built-in storage API:</p>
+    <ul>
+      <li>Your saved notes and lecture metadata</li>
+      <li>Concept mastery scores and quiz history</li>
+      <li>Your AI model preference and buddy mode setting</li>
+      <li>Your OpenRouter API key (if you provide one)</li>
+    </ul>
+    <p>This data never leaves your browser unless you explicitly export it.</p>
+
+    <h2>Data sent to third parties</h2>
+    <p>When you generate notes, quizzes, or summaries, CoNote sends the lecture transcript text to <strong>OpenRouter</strong> (openrouter.ai) for AI processing. This is the only external service CoNote communicates with.</p>
+    <p>What is sent:</p>
+    <ul>
+      <li>Lecture transcript text</li>
+      <li>Lecture title</li>
+      <li>Your API key (for authentication with OpenRouter)</li>
+    </ul>
+    <p>What is NOT sent: your name, email, browsing history, or any data from pages other than the Udemy lecture you're viewing.</p>
+    <p>OpenRouter's privacy policy governs how they handle data sent to their API. We recommend reviewing it at <a href="https://openrouter.ai/privacy" style="color: var(--ac)">openrouter.ai/privacy</a>.</p>
+
+    <h2>Permissions</h2>
+    <p>CoNote requests the following Chrome permissions:</p>
+    <ul>
+      <li><strong>storage</strong> — to save your notes and settings locally</li>
+      <li><strong>activeTab</strong> — to read the current Udemy page content</li>
+      <li><strong>Host access to *.udemy.com</strong> — to inject the CoNote buddy on Udemy pages</li>
+      <li><strong>Host access to openrouter.ai</strong> — to send API requests for AI processing</li>
+    </ul>
+
+    <h2>Data deletion</h2>
+    <p>You can delete all your data at any time using the "Clear all" button in the CoNote popup, or by uninstalling the extension. Since all data is stored locally, uninstalling removes everything permanently.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>If we make changes to this privacy policy, we will update the date at the top of this page. Major changes will be communicated through the extension's update notes on the Chrome Web Store.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about this policy? Email <a href="mailto:support@conote.app" style="color: var(--ac)">support@conote.app</a>.</p>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <a href="/" class="logo">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9d94f5" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span>CoNote</span>
+        </a>
+      </div>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="mailto:support@conote.app">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
