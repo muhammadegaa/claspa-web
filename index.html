@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Claspa — AI Learning Assistant for Online Courses</title>
   <meta name="description" content="Claspa captures lecture transcripts, generates structured notes, and uses spaced repetition to help you actually remember what you learn. Starting with Udemy. Free Chrome extension.">
-  <meta name="keywords" content="Udemy notes, AI note taker, online course notes, Chrome extension, spaced repetition, study buddy, lecture notes, learning assistant">
 
   <!-- OG / Social -->
   <meta property="og:type" content="website">
@@ -15,104 +14,115 @@
   <meta property="og:image" content="https://claspa.app/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Claspa — AI Learning Assistant for Online Courses">
-  <meta name="twitter:description" content="Auto-captures transcripts, generates structured notes, quizzes you on key concepts. Starting with Udemy. Free Chrome extension.">
+  <meta name="twitter:description" content="Auto-captures transcripts, generates structured notes, quizzes you on key concepts.">
   <link rel="canonical" href="https://claspa.app">
-  <meta name="theme-color" content="#0a0a14">
+  <meta name="theme-color" content="#111111">
+  <link rel="icon" href="assets/logo-icon.svg" type="image/svg+xml">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Comfortaa:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Phosphor Icons (duotone — premium feel, not cheap line icons) -->
+  <!-- Phosphor Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <!-- Grain overlay -->
+  <div class="grain"></div>
+
   <!-- Nav -->
   <nav>
     <div class="nav-inner">
       <a href="/" class="logo">
-        <div class="logo-mark">C</div>
-        <span>Claspa</span>
+        <img src="assets/logo-wordmark.svg" alt="Claspa" class="logo-wordmark">
       </a>
       <div class="nav-links" id="nav-links">
         <a href="#features">Features</a>
         <a href="#how-it-works">How it works</a>
         <a href="#pricing">Pricing</a>
         <a href="/blog/">Blog</a>
-        <a href="#pricing" class="btn btn-sm">Get Claspa</a>
+        <a href="#pricing" class="btn btn-sm btn-shine">Get Claspa</a>
       </div>
       <button class="nav-mobile" aria-label="Menu" onclick="document.getElementById('nav-links').classList.toggle('open')">
-        <i class="ph-duotone ph-list" style="font-size:22px"></i>
+        <i class="ph-bold ph-list" style="font-size:20px"></i>
       </button>
     </div>
   </nav>
 
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-badge anim-in" style="--d:0">
-      <i class="ph-duotone ph-browser" style="font-size:16px"></i>
-      AI Learning Assistant — Starting with Udemy
-    </div>
-    <h1 class="anim-in" style="--d:1">You watch the lecture.<br><span class="gradient-text">Claspa takes the notes.</span></h1>
-    <p class="hero-sub anim-in" style="--d:2">Captures transcripts, generates structured notes, and quizzes you with spaced repetition. 90 seconds to install. Works on any Udemy course — more platforms coming soon.</p>
-    <div class="hero-actions anim-in" style="--d:3">
-      <a href="#pricing" class="btn btn-lg">
-        <i class="ph-duotone ph-download-simple" style="font-size:18px"></i>
-        Install Free
-      </a>
-      <a href="#how-it-works" class="btn btn-ghost btn-lg">See how it works</a>
+    <!-- Background gradient wash -->
+    <div class="hero-gradient-wash"></div>
+
+    <!-- Elegant floating shapes (21st.dev HeroGeometric pattern) -->
+    <div class="hero-shapes">
+      <div class="elegant-shape shape-1" style="--w:600px;--h:140px;--r:12deg;--delay:0.3s;--grad:rgba(255,224,194,0.12)"></div>
+      <div class="elegant-shape shape-2" style="--w:500px;--h:120px;--r:-15deg;--delay:0.5s;--grad:rgba(229,77,46,0.10)"></div>
+      <div class="elegant-shape shape-3" style="--w:300px;--h:80px;--r:-8deg;--delay:0.4s;--grad:rgba(255,223,181,0.10)"></div>
+      <div class="elegant-shape shape-4" style="--w:200px;--h:60px;--r:20deg;--delay:0.6s;--grad:rgba(245,158,11,0.10)"></div>
+      <div class="elegant-shape shape-5" style="--w:150px;--h:40px;--r:-25deg;--delay:0.7s;--grad:rgba(100,74,64,0.12)"></div>
     </div>
 
-    <!-- Hero visual: realistic product mock -->
+    <!-- Top/bottom fade overlays -->
+    <div class="hero-fade-overlay"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge anim-in" style="--d:0">
+        <span class="hero-badge-dot"></span>
+        AI Learning Assistant — Starting with Udemy
+      </div>
+      <h1 class="anim-in" style="--d:1">
+        <span class="hero-title-line">You watch the lecture.</span><br>
+        <span class="gradient-text">Claspa takes the notes.</span>
+      </h1>
+      <p class="hero-sub anim-in" style="--d:2">Captures transcripts, generates structured notes, and quizzes you with spaced repetition. 90 seconds to install. Works on any Udemy course.</p>
+      <div class="hero-actions anim-in" style="--d:3">
+        <a href="#pricing" class="btn btn-lg btn-shine">
+          <i class="ph-bold ph-download-simple" style="font-size:18px"></i>
+          Install Free
+        </a>
+        <a href="#how-it-works" class="btn btn-ghost btn-lg">See how it works</a>
+      </div>
+    </div>
+
+    <!-- Hero visual -->
     <div class="hero-visual anim-in" style="--d:4">
       <div class="browser-frame">
         <div class="browser-bar">
           <div class="browser-dots"><span></span><span></span><span></span></div>
           <div class="browser-url">
-            <i class="ph-duotone ph-lock-simple" style="font-size:13px;color:#22c55e"></i>
-            udemy.com/course/data-science-bootcamp/learn/lecture/42
+            <i class="ph-bold ph-lock-simple" style="font-size:11px;color:#22c55e"></i>
+            <span>udemy.com/course/data-science-bootcamp/learn/lecture/42</span>
           </div>
         </div>
         <div class="browser-content">
           <div class="mock-udemy">
             <div class="mock-video">
-              <div class="mock-play">
-                <i class="ph-fill ph-play" style="font-size:22px"></i>
-              </div>
+              <div class="mock-play"><i class="ph-fill ph-play" style="font-size:20px"></i></div>
               <div class="mock-timeline"><div class="mock-timeline-fill"></div></div>
-              <div class="mock-video-title">Lecture 42: Feature Engineering & Selection</div>
             </div>
             <div class="mock-buddy">
-              <div class="mock-pill">
-                <i class="ph-duotone ph-note-pencil" style="font-size:18px"></i>
-              </div>
+              <div class="mock-pill"><i class="ph-duotone ph-note-pencil" style="font-size:14px"></i></div>
               <div class="mock-panel">
                 <div class="mock-header">
-                  <div class="mock-avatar">
-                    <i class="ph-duotone ph-note-pencil" style="font-size:14px"></i>
-                  </div>
-                  <div>
-                    <div class="mock-msg">Your notes are ready</div>
-                    <div class="mock-sub">3 key concepts extracted</div>
-                  </div>
+                  <div class="mock-avatar"><i class="ph-duotone ph-note-pencil" style="font-size:10px"></i></div>
+                  <div><div class="mock-msg">Your notes are ready</div><div class="mock-sub">3 key concepts extracted</div></div>
                 </div>
                 <div class="mock-notes">
                   <div class="mock-h">Feature Engineering</div>
-                  <div class="mock-text">Transform raw data into features that better represent the underlying problem. Three main approaches:</div>
-                  <div class="mock-bullet"><strong>Domain-driven</strong> — use expertise to create meaningful features</div>
-                  <div class="mock-bullet"><strong>Automated</strong> — libraries like Featuretools generate candidates</div>
-                  <div class="mock-bullet"><strong>Selection</strong> — remove redundant features via correlation</div>
+                  <div class="mock-bullet"><strong>Domain-driven</strong> — meaningful features from expertise</div>
+                  <div class="mock-bullet"><strong>Automated</strong> — Featuretools generates candidates</div>
+                  <div class="mock-bullet"><strong>Selection</strong> — remove via correlation</div>
                   <div class="mock-h2">Key Takeaways</div>
-                  <div class="mock-bullet">Always engineer features before tuning hyperparameters</div>
-                  <div class="mock-bullet">Use mutual information to rank feature relevance</div>
+                  <div class="mock-bullet">Engineer features before tuning params</div>
                 </div>
                 <div class="mock-actions">
-                  <div class="mock-btn"><i class="ph-duotone ph-copy" style="font-size:12px"></i> Copy</div>
-                  <div class="mock-btn mock-btn-save"><i class="ph-duotone ph-floppy-disk" style="font-size:12px"></i> Save</div>
+                  <div class="mock-btn"><i class="ph-bold ph-copy" style="font-size:8px"></i> Copy</div>
+                  <div class="mock-btn mock-btn-save"><i class="ph-bold ph-floppy-disk" style="font-size:8px"></i> Save</div>
                 </div>
               </div>
             </div>
@@ -122,84 +132,182 @@
     </div>
   </section>
 
-  <!-- Trust strip -->
+  <!-- Trust marquee -->
   <section class="trust">
-    <div class="trust-inner">
-      <div class="trust-item">
-        <i class="ph-duotone ph-shield-check" style="font-size:20px"></i>
-        <span>Data stays on your device</span>
-      </div>
-      <div class="trust-divider"></div>
-      <div class="trust-item">
-        <i class="ph-duotone ph-google-chrome-logo" style="font-size:20px"></i>
-        <span>Chrome Web Store</span>
-      </div>
-      <div class="trust-divider"></div>
-      <div class="trust-item">
-        <i class="ph-duotone ph-key" style="font-size:20px"></i>
-        <span>Bring your own AI key</span>
-      </div>
-      <div class="trust-divider"></div>
-      <div class="trust-item">
-        <i class="ph-duotone ph-globe-hemisphere-west" style="font-size:20px"></i>
-        <span>Udemy today, more platforms soon</span>
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span class="trust-item"><i class="ph-duotone ph-shield-check"></i> Data stays on your device</span>
+        <span class="trust-sep"></span>
+        <span class="trust-item"><i class="ph-duotone ph-google-chrome-logo"></i> Chrome Web Store</span>
+        <span class="trust-sep"></span>
+        <span class="trust-item"><i class="ph-duotone ph-key"></i> Bring your own AI key</span>
+        <span class="trust-sep"></span>
+        <span class="trust-item"><i class="ph-duotone ph-globe-hemisphere-west"></i> Udemy today, more platforms soon</span>
+        <span class="trust-sep"></span>
+        <span class="trust-item"><i class="ph-duotone ph-lightning"></i> 90 seconds to install</span>
+        <span class="trust-sep"></span>
+        <span class="trust-item"><i class="ph-duotone ph-credit-card"></i> No credit card needed</span>
+        <span class="trust-sep"></span>
+        <!-- Duplicate for seamless loop -->
+        <span class="trust-item"><i class="ph-duotone ph-shield-check"></i> Data stays on your device</span>
+        <span class="trust-sep"></span>
+        <span class="trust-item"><i class="ph-duotone ph-google-chrome-logo"></i> Chrome Web Store</span>
+        <span class="trust-sep"></span>
+        <span class="trust-item"><i class="ph-duotone ph-key"></i> Bring your own AI key</span>
+        <span class="trust-sep"></span>
+        <span class="trust-item"><i class="ph-duotone ph-globe-hemisphere-west"></i> Udemy today, more platforms soon</span>
+        <span class="trust-sep"></span>
+        <span class="trust-item"><i class="ph-duotone ph-lightning"></i> 90 seconds to install</span>
+        <span class="trust-sep"></span>
+        <span class="trust-item"><i class="ph-duotone ph-credit-card"></i> No credit card needed</span>
+        <span class="trust-sep"></span>
       </div>
     </div>
   </section>
 
-  <!-- Features -->
+  <!-- Features: Showcase (21st.dev pattern) -->
   <section id="features" class="features">
     <div class="section-label scroll-reveal">What it does</div>
-    <h2 class="scroll-reveal">Six things you'll never<br>do manually again</h2>
+    <h2 class="scroll-reveal">Everything you need to<br><span class="gradient-text">actually remember</span> what you learn</h2>
 
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon fi-purple">
-          <i class="ph-duotone ph-lightning"></i>
+    <div class="showcase" id="showcase">
+      <!-- Floating preview — CSS mock visuals instead of stock photos -->
+      <div class="showcase-preview" id="showcase-preview">
+        <!-- 0: Notes -->
+        <div class="showcase-img" data-index="0">
+          <div class="sp-mock sp-notes">
+            <div class="sp-h">Feature Engineering</div>
+            <div class="sp-line" style="width:90%"></div>
+            <div class="sp-line" style="width:75%"></div>
+            <div class="sp-line" style="width:85%"></div>
+            <div class="sp-h">Key Takeaways</div>
+            <div class="sp-line" style="width:80%"></div>
+            <div class="sp-line" style="width:65%"></div>
+          </div>
         </div>
-        <h3>Instant transcript capture</h3>
-        <p>Open the transcript panel once. Claspa reads every word in real time across video and text lectures. You never copy-paste again.</p>
+        <!-- 1: Transcript -->
+        <div class="showcase-img" data-index="1">
+          <div class="sp-mock sp-transcript">
+            <div class="sp-cue active"></div>
+            <div class="sp-cue"></div>
+            <div class="sp-cue"></div>
+            <div class="sp-cue"></div>
+            <div class="sp-cue"></div>
+            <div class="sp-cue active"></div>
+            <div class="sp-cue"></div>
+          </div>
+        </div>
+        <!-- 2: Quiz -->
+        <div class="showcase-img" data-index="2">
+          <div class="sp-mock sp-quiz">
+            <div class="sp-q">What best describes feature selection?</div>
+            <div class="sp-choice">Removing redundant features</div>
+            <div class="sp-choice correct">Using correlation and importance</div>
+            <div class="sp-choice">Adding more data points</div>
+          </div>
+        </div>
+        <!-- 3: Mastery -->
+        <div class="showcase-img" data-index="3">
+          <div class="sp-mock sp-mastery">
+            <div class="sp-bar"><span>New</span><div class="sp-track"><div class="sp-fill" style="width:12%;background:#94a3b8"></div></div></div>
+            <div class="sp-bar"><span>Learning</span><div class="sp-track"><div class="sp-fill" style="width:38%;background:#ffe0c2"></div></div></div>
+            <div class="sp-bar"><span>Known</span><div class="sp-track"><div class="sp-fill" style="width:30%;background:#ffdfb5"></div></div></div>
+            <div class="sp-bar"><span>Mastered</span><div class="sp-track"><div class="sp-fill" style="width:20%;background:#22c55e"></div></div></div>
+          </div>
+        </div>
+        <!-- 4: Screenshot -->
+        <div class="showcase-img" data-index="4">
+          <div class="sp-mock sp-screenshot">
+            <div class="sp-frame">
+              <div class="sp-diagram"></div>
+              <div class="sp-capture-icon"><i class="ph-bold ph-aperture" style="font-size:20px;color:#ffe0c2"></i></div>
+            </div>
+          </div>
+        </div>
+        <!-- 5: Connections -->
+        <div class="showcase-img" data-index="5">
+          <div class="sp-mock sp-connections">
+            <div class="sp-node n1">Supply Chain</div>
+            <div class="sp-edge"></div>
+            <div class="sp-node n2">Bottleneck Analysis</div>
+            <div class="sp-link-label">builds on Lecture 3</div>
+          </div>
+        </div>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-icon fi-blue">
-          <i class="ph-duotone ph-pen-nib"></i>
+      <a href="#pricing" class="showcase-row" data-index="0">
+        <div class="showcase-row-bg"></div>
+        <div class="showcase-info">
+          <div class="showcase-title">
+            <span>Structured notes in one tap</span>
+            <i class="ph-bold ph-arrow-up-right showcase-arrow"></i>
+          </div>
+          <p>AI reads the full transcript and writes organized notes — headings, key terms, takeaways.</p>
         </div>
-        <h3>Structured notes in one tap</h3>
-        <p>AI reads the full transcript and writes organized notes by topic. Headings, key terms bolded, takeaways at the bottom. Actual study material, not a vague summary.</p>
-      </div>
+        <span class="showcase-tag">One tap</span>
+      </a>
 
-      <div class="feature-card">
-        <div class="feature-icon fi-violet">
-          <i class="ph-duotone ph-brain"></i>
+      <a href="#pricing" class="showcase-row" data-index="1">
+        <div class="showcase-row-bg"></div>
+        <div class="showcase-info">
+          <div class="showcase-title">
+            <span>Instant transcript capture</span>
+            <i class="ph-bold ph-arrow-up-right showcase-arrow"></i>
+          </div>
+          <p>Open the transcript panel once. Claspa reads every word in real time.</p>
         </div>
-        <h3>Quizzes when you pause</h3>
-        <p>Pause the video and get a targeted comprehension question. Powered by SM-2 spaced repetition — it knows exactly what you're shaky on.</p>
-      </div>
+        <span class="showcase-tag">Real-time</span>
+      </a>
 
-      <div class="feature-card">
-        <div class="feature-icon fi-green">
-          <i class="ph-duotone ph-chart-line-up"></i>
+      <a href="#pricing" class="showcase-row" data-index="2">
+        <div class="showcase-row-bg"></div>
+        <div class="showcase-info">
+          <div class="showcase-title">
+            <span>Quizzes when you pause</span>
+            <i class="ph-bold ph-arrow-up-right showcase-arrow"></i>
+          </div>
+          <p>Targeted comprehension questions powered by SM-2 spaced repetition.</p>
         </div>
-        <h3>Mastery tracking</h3>
-        <p>Every concept gets a score: new, learning, known, mastered. Claspa tells you exactly what to review and when. No more re-watching entire lectures.</p>
-      </div>
+        <span class="showcase-tag">Spaced repetition</span>
+      </a>
 
-      <div class="feature-card">
-        <div class="feature-icon fi-amber">
-          <i class="ph-duotone ph-aperture"></i>
+      <a href="#pricing" class="showcase-row" data-index="3">
+        <div class="showcase-row-bg"></div>
+        <div class="showcase-info">
+          <div class="showcase-title">
+            <span>Mastery tracking</span>
+            <i class="ph-bold ph-arrow-up-right showcase-arrow"></i>
+          </div>
+          <p>Every concept scored: new, learning, known, mastered. Review exactly what you need.</p>
         </div>
-        <h3>Screenshot capture</h3>
-        <p>Important diagram on screen? One click captures the video frame and attaches it to your notes. Visual context stays with the content.</p>
-      </div>
+        <span class="showcase-tag">Per concept</span>
+      </a>
 
-      <div class="feature-card">
-        <div class="feature-icon fi-red">
-          <i class="ph-duotone ph-git-branch"></i>
+      <a href="#pricing" class="showcase-row" data-index="4">
+        <div class="showcase-row-bg"></div>
+        <div class="showcase-info">
+          <div class="showcase-title">
+            <span>Screenshot capture</span>
+            <i class="ph-bold ph-arrow-up-right showcase-arrow"></i>
+          </div>
+          <p>One click captures the video frame and attaches it to your notes.</p>
         </div>
-        <h3>Cross-lecture connections</h3>
-        <p>Claspa remembers concepts from earlier lectures and surfaces meaningful links. "This builds on the framework from Lecture 3."</p>
-      </div>
+        <span class="showcase-tag">One click</span>
+      </a>
+
+      <a href="#pricing" class="showcase-row" data-index="5">
+        <div class="showcase-row-bg"></div>
+        <div class="showcase-info">
+          <div class="showcase-title">
+            <span>Cross-lecture connections</span>
+            <i class="ph-bold ph-arrow-up-right showcase-arrow"></i>
+          </div>
+          <p>Surfaces meaningful links from earlier lectures automatically.</p>
+        </div>
+        <span class="showcase-tag">Automatic</span>
+      </a>
+
+      <div class="showcase-border-end"></div>
     </div>
   </section>
 
@@ -210,9 +318,7 @@
 
     <div class="steps-container">
       <div class="step scroll-reveal">
-        <div class="step-num">
-          <i class="ph-duotone ph-play" style="font-size:18px"></i>
-        </div>
+        <div class="step-num"><i class="ph-duotone ph-play" style="font-size:20px"></i></div>
         <div class="step-line"></div>
         <div class="step-content">
           <h3>Open any Udemy lecture</h3>
@@ -220,9 +326,7 @@
         </div>
       </div>
       <div class="step scroll-reveal">
-        <div class="step-num">
-          <i class="ph-duotone ph-sparkle" style="font-size:18px"></i>
-        </div>
+        <div class="step-num"><i class="ph-duotone ph-sparkle" style="font-size:20px"></i></div>
         <div class="step-line"></div>
         <div class="step-content">
           <h3>Tap "Get my notes"</h3>
@@ -230,9 +334,7 @@
         </div>
       </div>
       <div class="step scroll-reveal">
-        <div class="step-num">
-          <i class="ph-duotone ph-brain" style="font-size:18px"></i>
-        </div>
+        <div class="step-num"><i class="ph-duotone ph-brain" style="font-size:20px"></i></div>
         <div class="step-content">
           <h3>Review and retain</h3>
           <p>Spaced repetition tracks every concept and tells you what to review.</p>
@@ -253,29 +355,29 @@
         <div class="price-amount"><span class="price-dollar">$</span>0</div>
         <div class="price-period">3 lectures per day, forever</div>
         <ul class="price-features">
-          <li><i class="ph-fill ph-check-circle" style="font-size:16px;color:#22c55e"></i> AI note generation</li>
-          <li><i class="ph-fill ph-check-circle" style="font-size:16px;color:#22c55e"></i> Transcript auto-capture</li>
-          <li><i class="ph-fill ph-check-circle" style="font-size:16px;color:#22c55e"></i> Mastery tracking</li>
-          <li><i class="ph-fill ph-check-circle" style="font-size:16px;color:#22c55e"></i> Quizzes on pause</li>
-          <li><i class="ph-fill ph-check-circle" style="font-size:16px;color:#22c55e"></i> Screenshot capture</li>
-          <li><i class="ph-fill ph-check-circle" style="font-size:16px;color:#22c55e"></i> All features included</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> AI note generation</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> Transcript auto-capture</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> Mastery tracking</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> Quizzes on pause</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> Screenshot capture</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> All features included</li>
         </ul>
         <a href="#" class="btn btn-outline" id="cta-free">Install Free</a>
       </div>
 
-      <div class="price-card price-card-highlight">
+      <div class="price-card price-card-glow">
         <div class="price-badge">Most popular</div>
         <div class="price-tier">Lifetime</div>
         <div class="price-amount"><span class="price-dollar">$</span>9</div>
         <div class="price-period">one-time payment, yours forever</div>
         <ul class="price-features">
-          <li><i class="ph-fill ph-check-circle" style="font-size:16px;color:#22c55e"></i> Everything in Free</li>
-          <li><i class="ph-fill ph-check-circle" style="font-size:16px;color:#22c55e"></i> Unlimited lectures</li>
-          <li><i class="ph-fill ph-check-circle" style="font-size:16px;color:#22c55e"></i> Bring your own AI key</li>
-          <li><i class="ph-fill ph-check-circle" style="font-size:16px;color:#22c55e"></i> Choose any AI model</li>
-          <li><i class="ph-fill ph-check-circle" style="font-size:16px;color:#22c55e"></i> No recurring fees ever</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> Everything in Free</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> Unlimited lectures</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> Bring your own AI key</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> Choose any AI model</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> No recurring fees ever</li>
         </ul>
-        <a href="#" class="btn btn-lg" id="cta-lifetime">Buy once — $9</a>
+        <a href="#" class="btn btn-lg btn-shine" id="cta-lifetime">Buy once — $9</a>
       </div>
 
       <div class="price-card">
@@ -283,10 +385,10 @@
         <div class="price-amount"><span class="price-dollar">$</span>3<span class="price-mo">/mo</span></div>
         <div class="price-period">cancel anytime</div>
         <ul class="price-features">
-          <li><i class="ph-fill ph-check-circle" style="font-size:16px;color:#22c55e"></i> Everything in Lifetime</li>
-          <li><i class="ph-fill ph-check-circle" style="font-size:16px;color:#22c55e"></i> AI included — no key needed</li>
-          <li><i class="ph-fill ph-check-circle" style="font-size:16px;color:#22c55e"></i> Priority support</li>
-          <li><i class="ph-fill ph-check-circle" style="font-size:16px;color:#22c55e"></i> Future Pro features</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> Everything in Lifetime</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> AI included — no key needed</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> Priority support</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> Future Pro features</li>
           <li class="price-feature-note">Best if you don't want to manage an API key</li>
         </ul>
         <a href="#" class="btn btn-outline" id="cta-pro">Subscribe — $3/mo</a>
@@ -297,10 +399,11 @@
   <!-- CTA -->
   <section class="cta">
     <div class="cta-inner scroll-reveal">
+      <div class="cta-glow"></div>
       <h2>Your next Udemy course<br>deserves better notes.</h2>
-      <p>Install Claspa, open a lecture, and let it work. You'll wonder how you studied without it.</p>
-      <a href="#" class="btn btn-lg" id="cta-bottom">
-        <i class="ph-duotone ph-download-simple" style="font-size:18px"></i>
+      <p>Install Claspa, open a lecture, and let it work.</p>
+      <a href="#" class="btn btn-lg btn-shine" id="cta-bottom">
+        <i class="ph-bold ph-download-simple" style="font-size:18px"></i>
         Install Claspa — Free
       </a>
       <div class="cta-trust">No account needed. Works instantly. 3 lectures/day free.</div>
@@ -311,10 +414,7 @@
   <footer>
     <div class="footer-inner">
       <div class="footer-left">
-        <a href="/" class="logo">
-          <div class="logo-mark sm">C</div>
-          <span>Claspa</span>
-        </a>
+        <a href="/" class="logo"><img src="assets/logo-wordmark.svg" alt="Claspa" class="logo-wordmark footer-wm"></a>
         <p>AI-powered learning assistant for online courses.</p>
       </div>
       <div class="footer-cols">
@@ -337,42 +437,76 @@
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Claspa. All rights reserved.</span>
-    </div>
+    <div class="footer-bottom">&copy; 2026 Claspa. All rights reserved.</div>
   </footer>
 
-  <!-- GSAP for scroll animations only — NO scroll hijacking -->
+  <!-- GSAP -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
 
   <script>
     gsap.registerPlugin(ScrollTrigger);
 
-    // Scroll-reveal elements (fade up)
+    // Scroll reveals
     document.querySelectorAll('.scroll-reveal').forEach(el => {
-      gsap.from(el, {
-        y: 32,
-        opacity: 0,
-        duration: 0.7,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 88%',
-          once: true,
-        }
+      gsap.from(el, { y: 30, opacity: 0, duration: 0.7, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 90%', once: true }
       });
     });
 
-    // Stagger feature cards — all animate when grid enters viewport
+    // Showcase: mouse-following image preview
+    (() => {
+      const container = document.getElementById('showcase');
+      const preview = document.getElementById('showcase-preview');
+      if (!container || !preview) return;
+
+      const imgs = preview.querySelectorAll('.showcase-img');
+      let mouse = { x: 0, y: 0 };
+      let smooth = { x: 0, y: 0 };
+      let hoveredIdx = null;
+      let raf;
+
+      const lerp = (a, b, f) => a + (b - a) * f;
+
+      function animate() {
+        smooth.x = lerp(smooth.x, mouse.x, 0.12);
+        smooth.y = lerp(smooth.y, mouse.y, 0.12);
+        preview.style.transform = `translate3d(${smooth.x + 24}px, ${smooth.y - 90}px, 0)`;
+        raf = requestAnimationFrame(animate);
+      }
+      raf = requestAnimationFrame(animate);
+
+      container.addEventListener('mousemove', e => {
+        const rect = container.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      });
+
+      container.querySelectorAll('.showcase-row').forEach(row => {
+        row.addEventListener('mouseenter', () => {
+          const idx = row.dataset.index;
+          hoveredIdx = idx;
+          preview.classList.add('visible');
+          imgs.forEach(img => {
+            img.classList.toggle('active', img.dataset.index === idx);
+          });
+        });
+        row.addEventListener('mouseleave', () => {
+          hoveredIdx = null;
+          preview.classList.remove('visible');
+        });
+      });
+    })();
+
+    // Showcase rows stagger reveal
     ScrollTrigger.create({
-      trigger: '.feature-grid',
-      start: 'top 92%',
+      trigger: '.showcase',
+      start: 'top 88%',
       once: true,
       onEnter: () => {
-        gsap.utils.toArray('.feature-card').forEach((card, i) => {
-          gsap.fromTo(card,
-            { y: 30, opacity: 0 },
+        gsap.utils.toArray('.showcase-row').forEach((row, i) => {
+          gsap.fromTo(row,
+            { y: 20, opacity: 0 },
             { y: 0, opacity: 1, duration: 0.5, delay: i * 0.08, ease: 'power2.out' }
           );
         });
@@ -386,21 +520,17 @@
       onLeaveBack: () => document.querySelector('nav').classList.remove('nav-scrolled'),
     });
 
-    // Smooth anchor scroll (native, no hijacking)
+    // Smooth anchor scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
         const href = a.getAttribute('href');
         if (href === '#') return;
         e.preventDefault();
         const target = document.querySelector(href);
-        if (target) {
-          const y = target.getBoundingClientRect().top + window.scrollY - 80;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }
+        if (target) window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
         document.getElementById('nav-links')?.classList.remove('open');
       });
     });
   </script>
-
 </body>
 </html>
