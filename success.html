@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Claspa!</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .success-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .success-card {
+      max-width: 480px;
+      width: 100%;
+      background: var(--sf);
+      border: 1px solid var(--bd2);
+      border-radius: 16px;
+      padding: 40px 32px;
+      text-align: center;
+    }
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(34,197,94,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .success-icon svg { width: 32px; height: 32px; stroke: #22c55e; }
+    .success-card h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .success-card p {
+      color: var(--tx2);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+    .license-box {
+      background: var(--bg);
+      border: 1px solid var(--bd2);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .license-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--tx3);
+      margin-bottom: 8px;
+    }
+    .license-key {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--ac);
+      letter-spacing: 1px;
+      word-break: break-all;
+    }
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 24px;
+      background: var(--ac);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-bottom: 24px;
+    }
+    .copy-btn:hover { background: #6b5dd3; }
+    .steps {
+      text-align: left;
+      background: rgba(124,111,247,0.06);
+      border: 1px solid rgba(124,111,247,0.12);
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+    .steps h3 {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--tx);
+    }
+    .steps ol {
+      padding-left: 18px;
+      font-size: 13px;
+      color: var(--tx2);
+    }
+    .steps li { margin-bottom: 6px; }
+    .steps strong { color: var(--tx); }
+    .loading-state { color: var(--tx2); font-size: 14px; }
+    .error-state { color: #ef4444; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="success-page">
+    <div class="success-card">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <h1>You're all set!</h1>
+      <p id="plan-msg">Loading your license...</p>
+
+      <div class="license-box" id="license-box" style="display:none">
+        <div class="license-label">Your License Key</div>
+        <div class="license-key" id="license-key"></div>
+      </div>
+
+      <button class="copy-btn" id="copy-btn" style="display:none" onclick="copyKey()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy to clipboard
+      </button>
+
+      <div class="steps" id="steps" style="display:none">
+        <h3>Activate in 3 steps:</h3>
+        <ol>
+          <li>Open Chrome and click the <strong>Claspa</strong> extension icon</li>
+          <li>Go to <strong>Settings</strong> tab</li>
+          <li>Paste your license key in the <strong>License Key</strong> field</li>
+        </ol>
+      </div>
+
+      <div id="loading" class="loading-state">Retrieving your license key...</div>
+      <div id="error" class="error-state" style="display:none"></div>
+    </div>
+  </div>
+
+  <script>
+    async function init() {
+      const params = new URLSearchParams(window.location.search);
+      const sessionId = params.get('session_id');
+
+      if (!sessionId) {
+        showError('No session found. If you just purchased, check your email for the license key.');
+        return;
+      }
+
+      try {
+        // Fetch session details from our API
+        const res = await fetch(`/api/session?id=${encodeURIComponent(sessionId)}`);
+        const data = await res.json();
+
+        if (data.licenseKey) {
+          showLicense(data.licenseKey, data.plan);
+        } else {
+          // Key might not be ready yet — retry once
+          setTimeout(async () => {
+            const retry = await fetch(`/api/session?id=${encodeURIComponent(sessionId)}`);
+            const retryData = await retry.json();
+            if (retryData.licenseKey) {
+              showLicense(retryData.licenseKey, retryData.plan);
+            } else {
+              showError('Your payment was successful! Your license key will be emailed to you shortly.');
+            }
+          }, 3000);
+        }
+      } catch (e) {
+        showError('Your payment was successful! Please check your email for the license key, or contact support.');
+      }
+    }
+
+    function showLicense(key, plan) {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('license-box').style.display = '';
+      document.getElementById('license-key').textContent = key;
+      document.getElementById('copy-btn').style.display = '';
+      document.getElementById('steps').style.display = '';
+      document.getElementById('plan-msg').textContent =
+        plan === 'pro' ? 'Welcome to Claspa Pro!' : 'Welcome to Claspa Lifetime!';
+    }
+
+    function showError(msg) {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('error').style.display = '';
+      document.getElementById('error').textContent = msg;
+      document.getElementById('plan-msg').textContent = 'Thank you for your purchase!';
+    }
+
+    function copyKey() {
+      const key = document.getElementById('license-key').textContent;
+      navigator.clipboard.writeText(key).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy to clipboard'; }, 2000);
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>
