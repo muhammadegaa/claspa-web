@@ -5,26 +5,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const PRODUCTS = {
   lifetime: {
     mode: 'payment',
-    line_items: [{
-      price_data: {
-        currency: 'usd',
-        product_data: { name: 'Claspa Lifetime', description: 'Unlimited lectures forever. Bring your own OpenRouter API key.' },
-        unit_amount: 900, // $9
-      },
-      quantity: 1,
-    }],
+    line_items: [{ price: 'price_1TM0wHAgPm8MkVOnVWJOTDuQ', quantity: 1 }],
   },
   pro: {
     mode: 'subscription',
-    line_items: [{
-      price_data: {
-        currency: 'usd',
-        product_data: { name: 'Claspa Pro', description: 'Unlimited lectures with AI included. No API key needed.' },
-        unit_amount: 300, // $3/mo
-        recurring: { interval: 'month' },
-      },
-      quantity: 1,
-    }],
+    line_items: [{ price: 'price_1TM0wIAgPm8MkVOnPdZNs1Wl', quantity: 1 }],
   },
 };
 

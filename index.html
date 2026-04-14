@@ -531,6 +531,29 @@
         document.getElementById('nav-links')?.classList.remove('open');
       });
     });
+
+    // Stripe Checkout
+    const CHECKOUT_API = '/api/checkout';
+    async function startCheckout(plan) {
+      const btn = document.getElementById('cta-' + plan);
+      if (btn) { btn.textContent = 'Loading…'; btn.style.pointerEvents = 'none'; }
+      try {
+        const res = await fetch(CHECKOUT_API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ plan }),
+        });
+        const data = await res.json();
+        if (data.url) window.location.href = data.url;
+        else throw new Error(data.error || 'Checkout failed');
+      } catch (err) {
+        alert('Could not start checkout: ' + err.message);
+        if (btn) { btn.textContent = plan === 'lifetime' ? 'Buy once — $9' : 'Subscribe — $3/mo'; btn.style.pointerEvents = ''; }
+      }
+    }
+
+    document.getElementById('cta-lifetime')?.addEventListener('click', e => { e.preventDefault(); startCheckout('lifetime'); });
+    document.getElementById('cta-pro')?.addEventListener('click', e => { e.preventDefault(); startCheckout('pro'); });
   </script>
 </body>
 </html>
