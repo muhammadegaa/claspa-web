@@ -62,14 +62,17 @@ module.exports = async (req, res) => {
   try {
     const rawBody = await getRawBody(req);
 
-    if (process.env.STRIPE_WEBHOOK_SECRET && sig) {
-      if (!verifySignature(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET)) {
-        return res.status(400).json({ error: 'Invalid signature' });
-      }
-      event = JSON.parse(rawBody);
-    } else {
-      event = JSON.parse(rawBody);
+    if (!process.env.STRIPE_WEBHOOK_SECRET) {
+      console.error('STRIPE_WEBHOOK_SECRET not configured — rejecting webhook');
+      return res.status(500).json({ error: 'Webhook not configured' });
     }
+    if (!sig) {
+      return res.status(400).json({ error: 'Missing stripe-signature header' });
+    }
+    if (!verifySignature(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET)) {
+      return res.status(400).json({ error: 'Invalid signature' });
+    }
+    event = JSON.parse(rawBody);
   } catch (err) {
     console.error('Webhook parse/verify failed:', err.message);
     return res.status(400).json({ error: 'Invalid payload' });
@@ -127,7 +130,43 @@ module.exports = async (req, res) => {
 
   if (event.type === 'customer.subscription.deleted') {
     const subscription = event.data.object;
-    console.log(`Subscription cancelled for customer: ${subscription.customer}`);
+    const customerId = subscription.customer;
+    console.log(`Subscription cancelled for customer: ${customerId}`);
+
+    // Revoke access: update KV license records + Firestore
+    try {
+      // Find and deactivate license in KV by searching Stripe sessions
+      const sessions = await stripeReq('GET', `/checkout/sessions?customer=${customerId}&limit=20`);
+      for (const s of (sessions.data || [])) {
+        const key = s.metadata?.licenseKey;
+        if (key && s.metadata?.plan === 'pro') {
+          // Update KV if available
+          if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+            const base = process.env.KV_REST_API_URL;
+            const token = process.env.KV_REST_API_TOKEN;
+            const existing = await fetch(`${base}/get/license:${key}`, { headers: { Authorization: `Bearer ${token}` } }).then(r => r.json());
+            if (existing.result) {
+              const parsed = typeof existing.result === 'string' ? JSON.parse(existing.result) : existing.result;
+              parsed.active = false;
+              await fetch(`${base}/set/license:${key}/${encodeURIComponent(JSON.stringify(parsed))}`, {
+                method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+              });
+              console.log(`KV license ${key} deactivated`);
+            }
+          }
+        }
+      }
+
+      // Downgrade Firestore user by customer ID
+      const { db } = require('./lib/firebase-admin');
+      const usersSnapshot = await db().collection('users').where('stripeCustomerId', '==', customerId).get();
+      for (const doc of usersSnapshot.docs) {
+        await doc.ref.update({ tier: 'free', stripeSubscriptionId: null, updatedAt: new Date().toISOString() });
+        console.log(`Firestore user ${doc.id} downgraded to free`);
+      }
+    } catch (e) {
+      console.error('Subscription revocation failed:', e.message);
+    }
   }
 
   res.status(200).json({ received: true });

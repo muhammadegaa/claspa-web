@@ -171,12 +171,12 @@
             if (retryData.licenseKey) {
               showLicense(retryData.licenseKey, retryData.plan);
             } else {
-              showError('Your payment was successful! Your license key will be emailed to you shortly.');
+              showError('Your payment was successful! Your license key is being generated — please refresh this page in a few seconds.');
             }
           }, 3000);
         }
       } catch (e) {
-        showError('Your payment was successful! Please check your email for the license key, or contact support.');
+        showError('Your payment was successful! Please refresh this page in a moment, or contact support at simatupang.ega@gmail.com.');
       }
     }
 

@@ -23,31 +23,51 @@ module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { licenseKey, messages, model, temperature, max_tokens } = req.body || {};
+  const { licenseKey, idToken, messages, model, temperature, max_tokens } = req.body || {};
 
-  if (!licenseKey || !licenseKey.startsWith('CLASPA-')) {
-    return res.status(401).json({ error: 'Invalid license key' });
+  if (!licenseKey && !idToken) {
+    return res.status(401).json({ error: 'Authentication required' });
   }
 
-  // Validate license is Pro tier
+  // Validate Pro tier via Firebase idToken OR legacy license key
   let isValid = false;
   try {
-    const kvData = await kvGet(`license:${licenseKey}`);
-    if (kvData) {
-      const parsed = typeof kvData === 'string' ? JSON.parse(kvData) : kvData;
-      isValid = parsed.active !== false && parsed.tier === 'pro';
-    }
-    if (!isValid) {
-      const sessions = await stripeGet('/checkout/sessions?limit=100');
-      const match = (sessions.data || []).find(s => s.metadata?.licenseKey === licenseKey && s.metadata?.plan === 'pro');
-      if (match && match.subscription) {
-        const sub = await stripeGet(`/subscriptions/${match.subscription}`);
-        isValid = sub.status === 'active' || sub.status === 'trialing';
+    if (idToken) {
+      // Firebase auth path — verify token and check Firestore tier
+      const { db } = require('./lib/firebase-admin');
+      const FIREBASE_API_KEY = process.env.FIREBASE_API_KEY;
+      const verifyRes = await fetch(
+        `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${FIREBASE_API_KEY}`,
+        { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ idToken }) }
+      );
+      const verifyData = await verifyRes.json();
+      const user = verifyData.users?.[0];
+      if (user) {
+        const userDoc = await db().doc(`users/${user.localId}`).get();
+        if (userDoc.exists) {
+          const tier = userDoc.data().tier;
+          isValid = tier === 'pro';
+        }
+      }
+    } else if (licenseKey?.startsWith('CLASPA-')) {
+      // Legacy license key path
+      const kvData = await kvGet(`license:${licenseKey}`);
+      if (kvData) {
+        const parsed = typeof kvData === 'string' ? JSON.parse(kvData) : kvData;
+        isValid = parsed.active !== false && parsed.tier === 'pro';
+      }
+      if (!isValid) {
+        const sessions = await stripeGet('/checkout/sessions?limit=100');
+        const match = (sessions.data || []).find(s => s.metadata?.licenseKey === licenseKey && s.metadata?.plan === 'pro');
+        if (match && match.subscription) {
+          const sub = await stripeGet(`/subscriptions/${match.subscription}`);
+          isValid = sub.status === 'active' || sub.status === 'trialing';
+        }
       }
     }
   } catch (e) {
-    console.error('License check error:', e.message);
-    return res.status(500).json({ error: 'License validation failed' });
+    console.error('Auth check error:', e.message);
+    return res.status(500).json({ error: 'Authorization failed' });
   }
 
   if (!isValid) {
