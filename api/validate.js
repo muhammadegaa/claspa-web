@@ -1,6 +1,19 @@
-const Stripe = require('stripe');
+const STRIPE_API = 'https://api.stripe.com/v1';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+function stripeGet(path) {
+  return fetch(`${STRIPE_API}${path}`, {
+    headers: { 'Authorization': `Bearer ${process.env.STRIPE_SECRET_KEY}` },
+  }).then(r => r.json());
+}
+
+async function kvGet(key) {
+  if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) return null;
+  const res = await fetch(`${process.env.KV_REST_API_URL}/get/${key}`, {
+    headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` },
+  });
+  const data = await res.json();
+  return data.result || null;
+}
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -16,34 +29,30 @@ module.exports = async (req, res) => {
 
   try {
     // Try Vercel KV first
-    if (process.env.KV_REST_API_URL) {
-      const { kv } = require('@vercel/kv');
-      const data = await kv.get(`license:${key}`);
-      if (data) {
-        const parsed = typeof data === 'string' ? JSON.parse(data) : data;
-        // For subscriptions, verify still active with Stripe
-        if (parsed.tier === 'pro' && parsed.stripeSubscriptionId) {
-          try {
-            const sub = await stripe.subscriptions.retrieve(parsed.stripeSubscriptionId);
-            if (sub.status !== 'active' && sub.status !== 'trialing') {
-              return res.status(200).json({ valid: false, tier: parsed.tier, reason: 'Subscription inactive' });
-            }
-          } catch (e) {
-            // If we can't verify, trust stored state
+    const kvData = await kvGet(`license:${key}`);
+    if (kvData) {
+      const parsed = typeof kvData === 'string' ? JSON.parse(kvData) : kvData;
+      // For subscriptions, verify still active with Stripe
+      if (parsed.tier === 'pro' && parsed.stripeSubscriptionId) {
+        try {
+          const sub = await stripeGet(`/subscriptions/${parsed.stripeSubscriptionId}`);
+          if (sub.status !== 'active' && sub.status !== 'trialing') {
+            return res.status(200).json({ valid: false, tier: parsed.tier, reason: 'Subscription inactive' });
           }
+        } catch (e) {
+          // If we can't verify, trust stored state
         }
-        return res.status(200).json({ valid: parsed.active !== false, tier: parsed.tier, email: parsed.email });
       }
+      return res.status(200).json({ valid: parsed.active !== false, tier: parsed.tier, email: parsed.email });
     }
 
     // Fallback: search Stripe checkout sessions by metadata
-    const sessions = await stripe.checkout.sessions.list({ limit: 100 });
-    const match = sessions.data.find(s => s.metadata?.licenseKey === key);
+    const sessions = await stripeGet('/checkout/sessions?limit=100');
+    const match = (sessions.data || []).find(s => s.metadata?.licenseKey === key);
     if (match) {
       const tier = match.metadata?.plan || 'lifetime';
-      // For pro, verify subscription is active
       if (tier === 'pro' && match.subscription) {
-        const sub = await stripe.subscriptions.retrieve(match.subscription);
+        const sub = await stripeGet(`/subscriptions/${match.subscription}`);
         if (sub.status !== 'active' && sub.status !== 'trialing') {
           return res.status(200).json({ valid: false, tier, reason: 'Subscription cancelled' });
         }

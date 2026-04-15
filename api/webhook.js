@@ -1,27 +1,56 @@
-const Stripe = require('stripe');
 const crypto = require('crypto');
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const STRIPE_API = 'https://api.stripe.com/v1';
+
+function stripeReq(method, path, params) {
+  const opts = {
+    method,
+    headers: {
+      'Authorization': `Bearer ${process.env.STRIPE_SECRET_KEY}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  };
+  if (params) opts.body = new URLSearchParams(params).toString();
+  return fetch(`${STRIPE_API}${path}`, opts).then(r => r.json());
+}
 
 function generateLicenseKey() {
   const seg = () => crypto.randomBytes(2).toString('hex').toUpperCase();
   return `CLASPA-${seg()}-${seg()}-${seg()}-${seg()}`;
 }
 
-// Simple in-memory + KV store for licenses
-// In production, use Vercel KV, Upstash Redis, or a database
+function verifySignature(payload, sig, secret) {
+  const items = sig.split(',').reduce((acc, part) => {
+    const [k, v] = part.split('=');
+    acc[k] = v;
+    return acc;
+  }, {});
+  const signedPayload = `${items.t}.${payload}`;
+  const expected = crypto.createHmac('sha256', secret).update(signedPayload).digest('hex');
+  return crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(items.v1));
+}
+
 async function storeLicense(key, data) {
-  // Using Vercel KV if available, fallback to edge config
-  if (process.env.KV_REST_API_URL) {
-    const { kv } = require('@vercel/kv');
-    await kv.set(`license:${key}`, JSON.stringify(data));
-    // Also index by email for lookups
-    if (data.email) await kv.set(`email:${data.email}`, key);
+  if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+    const base = process.env.KV_REST_API_URL;
+    const token = process.env.KV_REST_API_TOKEN;
+    const headers = { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' };
+    await fetch(`${base}/set/license:${key}/${encodeURIComponent(JSON.stringify(data))}`, { method: 'POST', headers });
+    if (data.email) {
+      await fetch(`${base}/set/email:${data.email}/${encodeURIComponent(key)}`, { method: 'POST', headers });
+    }
     return;
   }
-  // Fallback: store in Stripe metadata (works without external DB)
-  // The validate endpoint will check Stripe directly
   console.log('License stored (Stripe-only mode):', key, data.tier);
+}
+
+function getRawBody(req) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    req.on('data', c => chunks.push(c));
+    req.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+    req.on('error', reject);
+  });
 }
 
 module.exports = async (req, res) => {
@@ -31,17 +60,19 @@ module.exports = async (req, res) => {
   let event;
 
   try {
-    // Vercel sends raw body as buffer when configured
-    const rawBody = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+    const rawBody = await getRawBody(req);
+
     if (process.env.STRIPE_WEBHOOK_SECRET && sig) {
-      event = stripe.webhooks.constructEvent(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
+      if (!verifySignature(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET)) {
+        return res.status(400).json({ error: 'Invalid signature' });
+      }
+      event = JSON.parse(rawBody);
     } else {
-      // Development mode — parse directly
-      event = typeof req.body === 'object' ? { type: req.body.type, data: req.body.data } : JSON.parse(rawBody);
+      event = JSON.parse(rawBody);
     }
   } catch (err) {
-    console.error('Webhook signature verification failed:', err.message);
-    return res.status(400).json({ error: 'Invalid signature' });
+    console.error('Webhook parse/verify failed:', err.message);
+    return res.status(400).json({ error: 'Invalid payload' });
   }
 
   if (event.type === 'checkout.session.completed') {
@@ -62,14 +93,9 @@ module.exports = async (req, res) => {
 
     // Store license key in Stripe session metadata for retrieval on success page
     try {
-      if (session.payment_intent) {
-        await stripe.paymentIntents.update(session.payment_intent, {
-          metadata: { licenseKey, plan },
-        });
-      }
-      // Also update the checkout session metadata
-      await stripe.checkout.sessions.update(session.id, {
-        metadata: { ...session.metadata, licenseKey },
+      await stripeReq('POST', `/checkout/sessions/${session.id}`, {
+        'metadata[licenseKey]': licenseKey,
+        'metadata[plan]': plan,
       });
     } catch (e) {
       console.error('Failed to update Stripe metadata:', e.message);
@@ -80,15 +106,12 @@ module.exports = async (req, res) => {
 
   if (event.type === 'customer.subscription.deleted') {
     const subscription = event.data.object;
-    const email = subscription.metadata?.email || '';
     console.log(`Subscription cancelled for customer: ${subscription.customer}`);
-    // In production: look up license by customer ID and mark inactive
   }
 
   res.status(200).json({ received: true });
 };
 
-// Vercel config: need raw body for webhook signature verification
 module.exports.config = {
   api: { bodyParser: false },
 };

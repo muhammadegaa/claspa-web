@@ -1,7 +1,20 @@
-const Stripe = require('stripe');
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const STRIPE_API = 'https://api.stripe.com/v1';
 const OPENROUTER_API = 'https://openrouter.ai/api/v1/chat/completions';
+
+function stripeGet(path) {
+  return fetch(`${STRIPE_API}${path}`, {
+    headers: { 'Authorization': `Bearer ${process.env.STRIPE_SECRET_KEY}` },
+  }).then(r => r.json());
+}
+
+async function kvGet(key) {
+  if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) return null;
+  const r = await fetch(`${process.env.KV_REST_API_URL}/get/${key}`, {
+    headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` },
+  });
+  const data = await r.json();
+  return data.result || null;
+}
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -19,20 +32,16 @@ module.exports = async (req, res) => {
   // Validate license is Pro tier
   let isValid = false;
   try {
-    if (process.env.KV_REST_API_URL) {
-      const { kv } = require('@vercel/kv');
-      const data = await kv.get(`license:${licenseKey}`);
-      if (data) {
-        const parsed = typeof data === 'string' ? JSON.parse(data) : data;
-        isValid = parsed.active !== false && parsed.tier === 'pro';
-      }
+    const kvData = await kvGet(`license:${licenseKey}`);
+    if (kvData) {
+      const parsed = typeof kvData === 'string' ? JSON.parse(kvData) : kvData;
+      isValid = parsed.active !== false && parsed.tier === 'pro';
     }
     if (!isValid) {
-      // Fallback: check Stripe sessions
-      const sessions = await stripe.checkout.sessions.list({ limit: 100 });
-      const match = sessions.data.find(s => s.metadata?.licenseKey === licenseKey && s.metadata?.plan === 'pro');
+      const sessions = await stripeGet('/checkout/sessions?limit=100');
+      const match = (sessions.data || []).find(s => s.metadata?.licenseKey === licenseKey && s.metadata?.plan === 'pro');
       if (match && match.subscription) {
-        const sub = await stripe.subscriptions.retrieve(match.subscription);
+        const sub = await stripeGet(`/subscriptions/${match.subscription}`);
         isValid = sub.status === 'active' || sub.status === 'trialing';
       }
     }
@@ -52,11 +61,11 @@ module.exports = async (req, res) => {
       headers: {
         'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://claspa.app',
+        'HTTP-Referer': 'https://claspa-web.vercel.app',
         'X-Title': 'Claspa Pro',
       },
       body: JSON.stringify({
-        model: model || 'anthropic/claude-3.5-haiku',
+        model: model || 'anthropic/claude-sonnet-4.6',
         messages,
         temperature: temperature || 0.25,
         max_tokens: max_tokens || 1600,
