@@ -102,6 +102,27 @@ module.exports = async (req, res) => {
     }
 
     console.log(`License created: ${licenseKey} (${plan}) for ${email}`);
+
+    // Update Firestore user if we can match by email
+    if (email) {
+      try {
+        const { db } = require('./lib/firebase-admin');
+        const emailDoc = await db().doc(`emailIndex/${email.toLowerCase()}`).get();
+        if (emailDoc.exists) {
+          const { uid } = emailDoc.data();
+          await db().doc(`users/${uid}`).set({
+            tier: plan,
+            licenseKey,
+            stripeCustomerId: session.customer,
+            stripeSubscriptionId: session.subscription || null,
+            updatedAt: new Date().toISOString(),
+          }, { merge: true });
+          console.log(`Firestore updated for uid: ${uid}`);
+        }
+      } catch (e) {
+        console.error('Firestore write failed (non-fatal):', e.message);
+      }
+    }
   }
 
   if (event.type === 'customer.subscription.deleted') {
