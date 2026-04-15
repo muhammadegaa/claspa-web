@@ -82,7 +82,7 @@ module.exports = async (req, res) => {
         'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
         'HTTP-Referer': 'https://claspa-web.vercel.app',
-        'X-Title': 'Claspa Pro',
+        'X-Title': 'Ravenote Pro',
       },
       body: JSON.stringify({
         model: model || 'anthropic/claude-sonnet-4.6',

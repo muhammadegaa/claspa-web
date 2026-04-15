@@ -1,4 +1,4 @@
-# Reddit Launch Posts — Claspa
+# Reddit Launch Posts — Ravenote
 
 ## Post 1: r/Udemy
 **Title:** I built an AI tool that takes notes on Udemy lectures so I don't have to
@@ -8,7 +8,7 @@ I take a lot of Udemy courses for work and kept running into the same problem �
 
 Manual note-taking during video lectures is the worst. You either watch or write, can't do both properly.
 
-So I built Claspa — a Chrome extension that:
+So I built Ravenote — a Chrome extension that:
 - Reads the transcript panel automatically
 - Generates structured notes with AI (one click)
 - Quizzes me when I pause the video
@@ -20,7 +20,7 @@ It's BYOK — you use your own OpenRouter API key, so you control the cost. The 
 
 Just launched it and would love feedback from other Udemy learners. What features would make this more useful for you?
 
-[Link to claspa.app]
+[Link to claspa-web.vercel.app]
 
 ---
 
@@ -32,7 +32,7 @@ The forgetting curve is real. Hermann Ebbinghaus showed we lose ~70% of new info
 
 I was spending hours on Udemy courses but couldn't recall the key concepts a week later. Sound familiar?
 
-I built a Chrome extension called Claspa that combines AI note-taking with spaced repetition:
+I built a Chrome extension called Ravenote that combines AI note-taking with spaced repetition:
 
 1. It captures the lecture transcript automatically
 2. One tap → AI generates organized notes
@@ -52,7 +52,7 @@ Anyone else struggle with course retention? What's worked for you?
 **Body:**
 Learning to code through video courses has a specific problem — you watch someone build something, nod along, and then can't reproduce it.
 
-I built Claspa to fix this for my own learning. It's a Chrome extension for Udemy that:
+I built Ravenote to fix this for my own learning. It's a Chrome extension for Udemy that:
 
 - Grabs the lecture transcript automatically
 - Generates structured notes (saves me from pausing every 30 seconds)

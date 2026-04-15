@@ -1,11 +1,11 @@
-# TikTok / Reels Content Strategy — Claspa
+# TikTok / Reels Content Strategy — Ravenote
 
 ## Video 1: The Hook (15s)
 **Concept:** "This extension takes notes while I watch Udemy"
 **Script:**
 [Screen recording of Udemy lecture playing]
 "I used to pause every 30 seconds to take notes..."
-[Show the Claspa pill appearing, transcript being captured]
+[Show the Ravenote pill appearing, transcript being captured]
 "Now this AI does it for me."
 [Click pill → notes appear]
 "790 words captured. Notes generated. Zero typing."
@@ -31,7 +31,7 @@
 "The forgetting curve is brutal. Within 24 hours you lose 70%."
 [Show graph animation]
 "Unless you do active recall."
-[Show Claspa quiz, mastery tracking]
+[Show Ravenote quiz, mastery tracking]
 "This Chrome extension quizzes you while you watch and tracks what you actually retain."
 "I went from finishing courses and forgetting everything to actually remembering the key concepts."
 **Sound:** Educational/explainer audio
@@ -40,7 +40,7 @@
 **Concept:** "$9 and you never take manual notes again"
 **Script:**
 "Udemy course: $15. Note-taking app subscription: $10/month."
-[Show Claspa]
+[Show Ravenote]
 "AI buddy that takes notes, quizzes you, and tracks mastery: $9. Once."
 "Bring your own AI key. No subscription."
 **Sound:** Money/deal audio
@@ -50,7 +50,7 @@
 **Script:**
 [Split screen]
 Left: messy handwritten notes, incomplete
-Right: Claspa-generated structured notes with headers, bullet points, key takeaways
+Right: Ravenote-generated structured notes with headers, bullet points, key takeaways
 "We watched the same lecture."
 [Show mastery tracking]
 "But only one of us will remember it next week."

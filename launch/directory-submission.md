@@ -1,13 +1,13 @@
-# Directory Submission Plan — Claspa
+# Directory Submission Plan — Ravenote
 
 ## Submission Info (use for all directories)
 
-**Name:** Claspa
+**Name:** Ravenote
 **Tagline:** AI learning buddy that takes notes on Udemy courses
-**Description (short):** Claspa auto-captures Udemy transcripts, generates AI notes, quizzes you with spaced repetition, and tracks concept mastery. BYOK model — bring your own API key. $9 one-time.
-**Description (long):** Claspa is a Chrome extension that acts as your AI study buddy while you watch Udemy courses. It automatically reads the lecture transcript, generates structured notes with one tap, and quizzes you on key concepts when you pause. Using the SM-2 spaced repetition algorithm, it tracks which concepts you've mastered and which need review. It even finds connections between lectures so you build a complete mental model of the course. BYOK model means you use your own OpenRouter API key — no subscription tax on AI calls.
+**Description (short):** Ravenote auto-captures Udemy transcripts, generates AI notes, quizzes you with spaced repetition, and tracks concept mastery. BYOK model — bring your own API key. $9 one-time.
+**Description (long):** Ravenote is a Chrome extension that acts as your AI study buddy while you watch Udemy courses. It automatically reads the lecture transcript, generates structured notes with one tap, and quizzes you on key concepts when you pause. Using the SM-2 spaced repetition algorithm, it tracks which concepts you've mastered and which need review. It even finds connections between lectures so you build a complete mental model of the course. BYOK model means you use your own OpenRouter API key — no subscription tax on AI calls.
 **Category:** Productivity / Education / Chrome Extension / AI Tool
-**Website:** https://claspa.app
+**Website:** https://claspa-web.vercel.app
 **Pricing:** $9 one-time (Lifetime), $3/mo (Pro)
 **Logo:** [use extension icon]
 

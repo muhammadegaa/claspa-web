@@ -1,4 +1,4 @@
-# Product Hunt Launch — Claspa
+# Product Hunt Launch — Ravenote
 
 ## Tagline (60 chars max)
 AI buddy that takes notes while you watch Udemy courses
@@ -9,15 +9,15 @@ AI buddy that takes notes while you watch Udemy courses
 Ever finish a Udemy course and realize you can't remember most of it? You're not alone. Studies show we forget 90% of what we learn within a week. Manual note-taking during video lectures is painful — you either watch or write, never both.
 
 ### Paragraph 2 — The Solution
-Claspa is an AI learning buddy that sits alongside your Udemy courses. It auto-captures the transcript, generates structured notes with one tap, and — here's the key part — quizzes you on what you just learned using spaced repetition. It tracks which concepts you've mastered and which need review, so you actually retain what you learn.
+Ravenote is an AI learning buddy that sits alongside your Udemy courses. It auto-captures the transcript, generates structured notes with one tap, and — here's the key part — quizzes you on what you just learned using spaced repetition. It tracks which concepts you've mastered and which need review, so you actually retain what you learn.
 
 ### Paragraph 3 — How it's Different
-Unlike generic AI note tools, Claspa is built specifically for course learning. It connects concepts across lectures ("this builds on what you learned in Lecture 3"), captures screenshots of important slides, and adapts its behavior to your learning pace. BYOK model — bring your own OpenRouter API key, so you control the cost. $9 one-time for the tool.
+Unlike generic AI note tools, Ravenote is built specifically for course learning. It connects concepts across lectures ("this builds on what you learned in Lecture 3"), captures screenshots of important slides, and adapts its behavior to your learning pace. BYOK model — bring your own OpenRouter API key, so you control the cost. $9 one-time for the tool.
 
 ## First Comment (from maker)
-Hey PH! I built Claspa because I kept finishing Udemy courses and forgetting everything within a week.
+Hey PH! I built Ravenote because I kept finishing Udemy courses and forgetting everything within a week.
 
-The "aha" moment was realizing that note-taking isn't the hard part — retention is. So I built spaced repetition directly into the note-taking flow. When you pause a video, Claspa quizzes you on what you just watched. It knows which concepts you're shaky on and which you've locked in.
+The "aha" moment was realizing that note-taking isn't the hard part — retention is. So I built spaced repetition directly into the note-taking flow. When you pause a video, Ravenote quizzes you on what you just watched. It knows which concepts you're shaky on and which you've locked in.
 
 Key features:
 - Auto-captures Udemy transcripts (zero typing)
