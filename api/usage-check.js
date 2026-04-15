@@ -1,6 +1,6 @@
 const { db } = require('./lib/firebase-admin');
 
-const FIREBASE_API_KEY = 'AIzaSyAUXkBgxP6x4quoZpyVO33QskVVi7BBrGg';
+const FIREBASE_API_KEY = process.env.FIREBASE_API_KEY;
 const FREE_DAILY_LIMIT = 3;
 
 async function verifyIdToken(idToken) {
