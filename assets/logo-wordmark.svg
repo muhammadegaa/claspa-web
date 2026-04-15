@@ -1,10 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 52" fill="none">
-  <!-- Raven silhouette icon -->
-  <g transform="translate(4, 4) scale(0.85)">
-    <path d="M44 16c-2-4-6-7-10-8-1 0-2 0-3 1-2-3-5-5-9-5-6 0-11 4-13 9-4 2-7 6-7 11 0 3 1 6 3 8l4 4c2 1 4 2 7 2h2l6-2c2 1 4 1 6 0 4-1 7-4 9-7 2-2 3-5 3-8 1-2 2-4 2-5z" fill="#c49572"/>
-    <circle cx="28" cy="18" r="2" fill="#1a1a1a"/>
-    <path d="M36 20c1 0 3-1 4-2" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-  </g>
-  <!-- Ravenote text -->
-  <text x="52" y="35" font-family="Comfortaa, sans-serif" font-size="26" font-weight="700" fill="#c49572" letter-spacing="0.5">Ravenote</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 48" fill="none">
+  <!-- Ravenote: arrow-circle + wordmark -->
+  <circle cx="22" cy="24" r="20" fill="#d4a87c"/>
+  <line x1="12" y1="24" x2="30" y2="24" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
+  <polyline points="25,18 32,24 25,30" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <text x="52" y="32" font-family="Comfortaa, sans-serif" font-size="26" font-weight="700" fill="#c49572" letter-spacing="0.5">Ravenote</text>
 </svg>
