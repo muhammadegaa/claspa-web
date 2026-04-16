@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
     if (!plan || !PRODUCTS[plan]) return res.status(400).json({ error: 'Invalid plan. Use "lifetime" or "pro".' });
 
     const config = PRODUCTS[plan];
-    const baseUrl = process.env.BASE_URL || 'https://claspa.app';
+    const baseUrl = process.env.BASE_URL || 'https://claspa-web.vercel.app';
 
     const params = new URLSearchParams();
     params.append('mode', config.mode);

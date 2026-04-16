@@ -183,8 +183,10 @@ nav.nav-scrolled {
   width: 28px; height: 28px; border-radius: 7px;
 }
 .logo-mark.sm { width: 22px; height: 22px; border-radius: 5px; }
-.logo-wordmark { height: 20px; width: auto; }
-.footer-wm { height: 16px; }
+.logo-icon { width: 24px; height: 24px; flex-shrink: 0; }
+.logo-text { font-family: 'Comfortaa', sans-serif; font-weight: 700; font-size: 18px; color: #c49572; }
+.footer-wm .logo-icon { width: 20px; height: 20px; }
+.footer-wm .logo-text { font-size: 15px; }
 .nav-links {
   display: flex; align-items: center; gap: 32px;
   font-size: 14px; color: var(--tx3);

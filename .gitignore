@@ -5,3 +5,4 @@ node_modules/
 generate-logo.js
 gen-wordmark.js
 extract-s.js
+.vercel
