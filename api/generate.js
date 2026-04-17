@@ -33,7 +33,7 @@ module.exports = async (req, res) => {
   let isValid = false;
   try {
     if (idToken) {
-      // Firebase auth path — verify token and check Firestore tier
+      // Firebase auth path, verify token and check Firestore tier
       const { db } = require('./lib/firebase-admin');
       const FIREBASE_API_KEY = process.env.FIREBASE_API_KEY;
       const verifyRes = await fetch(
@@ -81,7 +81,7 @@ module.exports = async (req, res) => {
       headers: {
         'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://claspa-web.vercel.app',
+        'HTTP-Referer': 'https://ravenote.xyz',
         'X-Title': 'Ravenote Pro',
       },
       body: JSON.stringify({

@@ -63,7 +63,7 @@ module.exports = async (req, res) => {
     const rawBody = await getRawBody(req);
 
     if (!process.env.STRIPE_WEBHOOK_SECRET) {
-      console.error('STRIPE_WEBHOOK_SECRET not configured — rejecting webhook');
+      console.error('STRIPE_WEBHOOK_SECRET not configured, rejecting webhook');
       return res.status(500).json({ error: 'Webhook not configured' });
     }
     if (!sig) {

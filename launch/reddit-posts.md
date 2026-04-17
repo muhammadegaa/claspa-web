@@ -20,7 +20,7 @@ It's BYOK — you use your own OpenRouter API key, so you control the cost. The 
 
 Just launched it and would love feedback from other Udemy learners. What features would make this more useful for you?
 
-[Link to claspa-web.vercel.app]
+[Link to ravenote.xyz]
 
 ---
 

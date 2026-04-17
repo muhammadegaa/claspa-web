@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ravenote — AI Learning Assistant for Online Courses</title>
+  <title>Ravenote: AI Learning Assistant for Online Courses</title>
   <meta name="description" content="Ravenote captures lecture transcripts, generates structured notes, and uses spaced repetition to help you actually remember what you learn. Starting with Udemy. Free Chrome extension.">
 
   <!-- OG / Social -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://claspa-web.vercel.app">
-  <meta property="og:title" content="Ravenote — AI Learning Assistant for Online Courses">
+  <meta property="og:url" content="https://ravenote.xyz">
+  <meta property="og:title" content="Ravenote: AI Learning Assistant for Online Courses">
   <meta property="og:description" content="Auto-captures transcripts, generates structured notes, quizzes you on key concepts. Starting with Udemy. Free Chrome extension.">
-  <meta property="og:image" content="https://claspa-web.vercel.app/og-image.png">
+  <meta property="og:image" content="https://ravenote.xyz/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Ravenote — AI Learning Assistant for Online Courses">
+  <meta name="twitter:title" content="Ravenote: AI Learning Assistant for Online Courses">
   <meta name="twitter:description" content="Auto-captures transcripts, generates structured notes, quizzes you on key concepts.">
-  <link rel="canonical" href="https://claspa-web.vercel.app">
+  <link rel="canonical" href="https://ravenote.xyz">
   <meta name="theme-color" content="#111111">
   <link rel="icon" href="assets/logo-icon.svg" type="image/svg+xml">
 
@@ -74,7 +74,7 @@
     <div class="hero-content">
       <div class="hero-badge anim-in" style="--d:0">
         <span class="hero-badge-dot"></span>
-        AI Learning Assistant — Starting with Udemy
+        AI Learning Assistant for Udemy
       </div>
       <h1 class="anim-in" style="--d:1">
         <span class="hero-title-line">You watch the lecture.</span><br>
@@ -115,9 +115,9 @@
                 </div>
                 <div class="mock-notes">
                   <div class="mock-h">Feature Engineering</div>
-                  <div class="mock-bullet"><strong>Domain-driven</strong> — meaningful features from expertise</div>
-                  <div class="mock-bullet"><strong>Automated</strong> — Featuretools generates candidates</div>
-                  <div class="mock-bullet"><strong>Selection</strong> — remove via correlation</div>
+                  <div class="mock-bullet"><strong>Domain-driven</strong>: meaningful features from expertise</div>
+                  <div class="mock-bullet"><strong>Automated</strong>: Featuretools generates candidates</div>
+                  <div class="mock-bullet"><strong>Selection</strong>: remove via correlation</div>
                   <div class="mock-h2">Key Takeaways</div>
                   <div class="mock-bullet">Engineer features before tuning params</div>
                 </div>
@@ -172,7 +172,7 @@
     <h2 class="scroll-reveal">Everything you need to<br><span class="gradient-text">actually remember</span> what you learn</h2>
 
     <div class="showcase" id="showcase">
-      <!-- Floating preview — CSS mock visuals instead of stock photos -->
+      <!-- Floating preview, CSS mock visuals instead of stock photos -->
       <div class="showcase-preview" id="showcase-preview">
         <!-- 0: Notes -->
         <div class="showcase-img" data-index="0">
@@ -243,7 +243,7 @@
             <span>Structured notes in one tap</span>
             <i class="ph-bold ph-arrow-up-right showcase-arrow"></i>
           </div>
-          <p>AI reads the full transcript and writes organized notes — headings, key terms, takeaways.</p>
+          <p>AI reads the full transcript and writes organized notes with headings, key terms, and takeaways.</p>
         </div>
         <span class="showcase-tag">One tap</span>
       </a>
@@ -378,7 +378,7 @@
           <li><i class="ph-fill ph-check-circle check-icon"></i> Choose any AI model</li>
           <li><i class="ph-fill ph-check-circle check-icon"></i> No recurring fees ever</li>
         </ul>
-        <a href="#" class="btn btn-lg btn-shine" id="cta-lifetime">Buy once — $9</a>
+        <a href="#" class="btn btn-lg btn-shine" id="cta-lifetime">Buy once for $9</a>
       </div>
 
       <div class="price-card">
@@ -387,12 +387,12 @@
         <div class="price-period">cancel anytime</div>
         <ul class="price-features">
           <li><i class="ph-fill ph-check-circle check-icon"></i> Everything in Lifetime</li>
-          <li><i class="ph-fill ph-check-circle check-icon"></i> AI included — no key needed</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> AI included, no key needed</li>
           <li><i class="ph-fill ph-check-circle check-icon"></i> Priority support</li>
           <li><i class="ph-fill ph-check-circle check-icon"></i> Future Pro features</li>
           <li class="price-feature-note">Best if you don't want to manage an API key</li>
         </ul>
-        <a href="#" class="btn btn-outline" id="cta-pro">Subscribe — $3/mo</a>
+        <a href="#" class="btn btn-outline" id="cta-pro">Subscribe for $3/mo</a>
       </div>
     </div>
   </section>
@@ -405,7 +405,7 @@
       <p>Install Ravenote, open a lecture, and let it work.</p>
       <a href="#" class="btn btn-lg btn-shine" id="cta-bottom">
         <i class="ph-bold ph-download-simple" style="font-size:18px"></i>
-        Install Ravenote — Free
+        Install Ravenote for Free
       </a>
       <div class="cta-trust">No account needed. Works instantly. 3 lectures/day free.</div>
     </div>
@@ -549,7 +549,7 @@
         else throw new Error(data.error || 'Checkout failed');
       } catch (err) {
         alert('Could not start checkout: ' + err.message);
-        if (btn) { btn.textContent = plan === 'lifetime' ? 'Buy once — $9' : 'Subscribe — $3/mo'; btn.style.pointerEvents = ''; }
+        if (btn) { btn.textContent = plan === 'lifetime' ? 'Buy once for $9' : 'Subscribe for $3/mo'; btn.style.pointerEvents = ''; }
       }
     }
 

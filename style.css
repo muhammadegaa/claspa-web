@@ -1,12 +1,12 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   Ravenote Landing Page — Premium Dark Theme
+   Ravenote Landing Page, Premium Dark Theme
    Caffeine theme, showcase, grain texture, glow effects
    ═══════════════════════════════════════════════════════════════════════════ */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* Caffeine dark theme — 21st.dev */
+  /* Caffeine dark theme, 21st.dev */
   --bg:     #111111;
   --bg2:    #151515;
   --sf:     #191919;
@@ -456,7 +456,7 @@ nav.nav-scrolled {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   FEATURES — SHOWCASE (21st.dev project-showcase pattern)
+   FEATURES, SHOWCASE (21st.dev project-showcase pattern)
    ═══════════════════════════════════════════════════════════════════════════ */
 .features {
   max-width: var(--max-w);
