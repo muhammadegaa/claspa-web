@@ -48,51 +48,13 @@
       font-size: 14px;
       margin-bottom: 24px;
     }
-    .license-box {
-      background: var(--bg);
-      border: 1px solid var(--bd2);
-      border-radius: 10px;
-      padding: 16px;
-      margin-bottom: 20px;
-    }
-    .license-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--tx3);
-      margin-bottom: 8px;
-    }
-    .license-key {
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--ac);
-      letter-spacing: 1px;
-      word-break: break-all;
-    }
-    .copy-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 10px 24px;
-      background: var(--ac);
-      color: #fff;
-      font-size: 14px;
-      font-weight: 600;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.15s;
-      margin-bottom: 24px;
-    }
-    .copy-btn { background: linear-gradient(135deg, #644a40, #7a5c4f); color: #ffe0c2; }
-    .copy-btn:hover { background: linear-gradient(135deg, #7a5c4f, #8d6e5f); }
     .steps {
       text-align: left;
       background: rgba(255,224,194,0.06);
       border: 1px solid rgba(255,224,194,0.12);
       border-radius: 10px;
       padding: 16px 20px;
+      margin-bottom: 20px;
     }
     .steps h3 {
       font-size: 13px;
@@ -107,8 +69,32 @@
     }
     .steps li { margin-bottom: 6px; }
     .steps strong { color: var(--tx); }
+    .license-box {
+      background: var(--bg);
+      border: 1px solid var(--bd2);
+      border-radius: 10px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+    .license-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--tx3);
+      margin-bottom: 8px;
+    }
+    .license-key {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ac);
+      letter-spacing: 1px;
+      word-break: break-all;
+    }
     .loading-state { color: var(--tx2); font-size: 14px; }
     .error-state { color: #ef4444; font-size: 14px; }
+    details { margin-top: 16px; font-size: 12px; color: var(--tx3); text-align: left; }
+    details summary { cursor: pointer; }
   </style>
 </head>
 <body>
@@ -119,29 +105,37 @@
           <polyline points="20 6 9 17 4 12"/>
         </svg>
       </div>
-      <h1>You're all set!</h1>
-      <p id="plan-msg">Loading your license...</p>
+      <h1 id="headline">You're all set!</h1>
+      <p id="plan-msg">Finalizing your purchase…</p>
 
-      <div class="license-box" id="license-box" style="display:none">
-        <div class="license-label">Your License Key</div>
-        <div class="license-key" id="license-key"></div>
+      <div id="auto-sync" style="display:none">
+        <div class="steps">
+          <h3>Next steps</h3>
+          <ol>
+            <li>Head back to your <strong>Ravenote</strong> extension</li>
+            <li>Your plan updates automatically within a few seconds — reload the popup if you don't see it</li>
+            <li>Open any Udemy or YouTube lecture and start taking notes</li>
+          </ol>
+        </div>
+        <p style="font-size:12px;color:var(--tx3);margin:0">You can close this tab.</p>
       </div>
 
-      <button class="copy-btn" id="copy-btn" style="display:none" onclick="copyKey()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        Copy to clipboard
-      </button>
-
-      <div class="steps" id="steps" style="display:none">
-        <h3>Activate in 3 steps:</h3>
-        <ol>
-          <li>Open Chrome and click the <strong>Ravenote</strong> extension icon</li>
-          <li>Go to <strong>Settings</strong> tab</li>
-          <li>Paste your license key in the <strong>License Key</strong> field</li>
-        </ol>
+      <div id="legacy-key" style="display:none">
+        <div class="license-box">
+          <div class="license-label">Your License Key</div>
+          <div class="license-key" id="license-key"></div>
+        </div>
+        <div class="steps">
+          <h3>Activate in 3 steps</h3>
+          <ol>
+            <li>Open Chrome and click the <strong>Ravenote</strong> extension icon</li>
+            <li>Go to <strong>Settings</strong> tab</li>
+            <li>Paste your license key in the <strong>License Key</strong> field</li>
+          </ol>
+        </div>
       </div>
 
-      <div id="loading" class="loading-state">Retrieving your license key...</div>
+      <div id="loading" class="loading-state">Connecting to Stripe…</div>
       <div id="error" class="error-state" style="display:none"></div>
     </div>
   </div>
@@ -152,58 +146,70 @@
       const sessionId = params.get('session_id');
 
       if (!sessionId) {
-        showError('No session found. If you just purchased, check your email for the license key.');
+        showError('No session found. If you just purchased, check your email.');
         return;
       }
 
+      let data = null;
       try {
-        // Fetch session details from our API
         const res = await fetch(`/api/session?id=${encodeURIComponent(sessionId)}`);
-        const data = await res.json();
-
-        if (data.licenseKey) {
-          showLicense(data.licenseKey, data.plan);
-        } else {
-          // Key might not be ready yet, retry once
-          setTimeout(async () => {
-            const retry = await fetch(`/api/session?id=${encodeURIComponent(sessionId)}`);
-            const retryData = await retry.json();
-            if (retryData.licenseKey) {
-              showLicense(retryData.licenseKey, retryData.plan);
-            } else {
-              showError('Your payment was successful! Your license key is being generated, please refresh this page in a few seconds.');
-            }
-          }, 3000);
-        }
+        data = await res.json();
       } catch (e) {
-        showError('Your payment was successful! Please refresh this page in a moment, or contact support at simatupang.ega@gmail.com.');
+        showError('Payment confirmed but we could not reach our server. Refresh this page in a moment.');
+        return;
       }
+
+      // Tier auto-sync path: uid was attached → Firestore is being updated by the webhook.
+      // The extension will pick up the new tier on its next REFRESH_TIER call.
+      if (data.uid) {
+        showAutoSync(data.plan);
+        return;
+      }
+
+      // Legacy / anonymous purchase: fall back to license-key paste.
+      if (data.licenseKey) {
+        showLegacyKey(data.licenseKey, data.plan);
+        return;
+      }
+
+      // Key not ready yet → retry once.
+      setTimeout(async () => {
+        try {
+          const retry = await fetch(`/api/session?id=${encodeURIComponent(sessionId)}`);
+          const retryData = await retry.json();
+          if (retryData.uid) return showAutoSync(retryData.plan);
+          if (retryData.licenseKey) return showLegacyKey(retryData.licenseKey, retryData.plan);
+          showError('Payment successful. Your license is being generated — refresh in a few seconds.');
+        } catch (e) {
+          showError('Payment confirmed. Please refresh this page in a moment.');
+        }
+      }, 3000);
     }
 
-    function showLicense(key, plan) {
+    function planLabel(plan) {
+      if (plan === 'pro') return 'Welcome to Ravenote Pro!';
+      if (plan === 'lifetime') return 'Welcome to Ravenote Lifetime!';
+      return 'Thank you for your purchase!';
+    }
+
+    function showAutoSync(plan) {
       document.getElementById('loading').style.display = 'none';
-      document.getElementById('license-box').style.display = '';
+      document.getElementById('plan-msg').textContent = planLabel(plan);
+      document.getElementById('auto-sync').style.display = '';
+    }
+
+    function showLegacyKey(key, plan) {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('plan-msg').textContent = planLabel(plan);
       document.getElementById('license-key').textContent = key;
-      document.getElementById('copy-btn').style.display = '';
-      document.getElementById('steps').style.display = '';
-      document.getElementById('plan-msg').textContent =
-        plan === 'pro' ? 'Welcome to Ravenote Pro!' : 'Welcome to Ravenote Lifetime!';
+      document.getElementById('legacy-key').style.display = '';
     }
 
     function showError(msg) {
       document.getElementById('loading').style.display = 'none';
+      document.getElementById('plan-msg').textContent = 'Thank you for your purchase!';
       document.getElementById('error').style.display = '';
       document.getElementById('error').textContent = msg;
-      document.getElementById('plan-msg').textContent = 'Thank you for your purchase!';
-    }
-
-    function copyKey() {
-      const key = document.getElementById('license-key').textContent;
-      navigator.clipboard.writeText(key).then(() => {
-        const btn = document.getElementById('copy-btn');
-        btn.textContent = 'Copied!';
-        setTimeout(() => { btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy to clipboard'; }, 2000);
-      });
     }
 
     init();

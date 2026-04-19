@@ -383,16 +383,17 @@
 
       <div class="price-card">
         <div class="price-tier">Pro</div>
-        <div class="price-amount"><span class="price-dollar">$</span>3<span class="price-mo">/mo</span></div>
-        <div class="price-period">cancel anytime</div>
+        <div class="price-amount"><span class="price-dollar">$</span>5<span class="price-mo">/mo</span></div>
+        <div class="price-period">includes $3 of AI credits monthly</div>
         <ul class="price-features">
           <li><i class="ph-fill ph-check-circle check-icon"></i> Everything in Lifetime</li>
-          <li><i class="ph-fill ph-check-circle check-icon"></i> AI included, no key needed</li>
-          <li><i class="ph-fill ph-check-circle check-icon"></i> Priority support</li>
-          <li><i class="ph-fill ph-check-circle check-icon"></i> Future Pro features</li>
-          <li class="price-feature-note">Best if you don't want to manage an API key</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> AI included, no API key needed</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> $3 credits = ~70 Sonnet or ~300 Haiku lectures</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> Top up anytime if you need more</li>
+          <li><i class="ph-fill ph-check-circle check-icon"></i> Cancel anytime</li>
+          <li class="price-feature-note">Best if you don't want to manage an OpenRouter key</li>
         </ul>
-        <a href="#" class="btn btn-outline" id="cta-pro">Subscribe for $3/mo</a>
+        <a href="#" class="btn btn-outline" id="cta-pro">Subscribe for $5/mo</a>
       </div>
     </div>
   </section>
@@ -549,7 +550,7 @@
         else throw new Error(data.error || 'Checkout failed');
       } catch (err) {
         alert('Could not start checkout: ' + err.message);
-        if (btn) { btn.textContent = plan === 'lifetime' ? 'Buy once for $9' : 'Subscribe for $3/mo'; btn.style.pointerEvents = ''; }
+        if (btn) { btn.textContent = plan === 'lifetime' ? 'Buy once for $9' : 'Subscribe for $5/mo'; btn.style.pointerEvents = ''; }
       }
     }
 

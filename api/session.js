@@ -15,8 +15,11 @@ module.exports = async (req, res) => {
     const licenseKey = session.metadata?.licenseKey || null;
     const plan = session.metadata?.plan || 'lifetime';
     const email = session.customer_email || session.customer_details?.email || '';
+    // uid signals the auto-sync path on the success page: the webhook updated
+    // Firestore, so the extension will pick up the new tier on its next refresh.
+    const uid = session.metadata?.uid || null;
 
-    res.status(200).json({ licenseKey, plan, email, status: session.payment_status });
+    res.status(200).json({ licenseKey, plan, email, uid, status: session.payment_status });
   } catch (err) {
     console.error('Session retrieval error:', err.message);
     res.status(404).json({ error: 'Session not found' });

@@ -1,6 +1,9 @@
 {
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/(.*)", "destination": "/$1" }
+  "cleanUrls": true,
+  "crons": [
+    {
+      "path": "/api/cron-credits-reset",
+      "schedule": "0 2 * * *"
+    }
   ]
 }

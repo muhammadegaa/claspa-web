@@ -35,8 +35,23 @@ module.exports = async (req, res) => {
     const userRef = db().doc(`users/${uid}`);
     const userDoc = await userRef.get();
 
+    // Bootstrap user doc on first sight so the increment path below is authoritative
     if (!userDoc.exists) {
-      return res.status(200).json({ allowed: true, tier: 'free', used: 0, limit: FREE_DAILY_LIMIT });
+      const today = new Date().toISOString().slice(0, 10);
+      const seed = {
+        tier: 'free',
+        email: user.email || null,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        usage: { date: today, count: increment ? 1 : 0 },
+      };
+      await userRef.set(seed);
+      return res.status(200).json({
+        allowed: true,
+        tier: 'free',
+        used: seed.usage.count,
+        limit: FREE_DAILY_LIMIT,
+      });
     }
 
     const userData = userDoc.data();
