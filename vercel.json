@@ -1,5 +1,8 @@
 {
-  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/success", "destination": "/success.html" },
+    { "source": "/privacy", "destination": "/privacy.html" }
+  ],
   "crons": [
     {
       "path": "/api/cron-credits-reset",
