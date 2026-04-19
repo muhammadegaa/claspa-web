@@ -1,4 +1,4 @@
-const { auth, db } = require('./lib/firebase-admin');
+const { auth, db } = require('../lib/firebase-admin');
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');

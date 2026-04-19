@@ -5,8 +5,8 @@
 // CRON_SECRET (where CRON_SECRET is an env var we configure). Reject
 // requests without this header to prevent manual abuse.
 
-const { db } = require('./lib/firebase-admin');
-const { maybeResetMonthly, maybeExpireTopup } = require('./lib/credits');
+const { db } = require('../lib/firebase-admin');
+const { maybeResetMonthly, maybeExpireTopup } = require('../lib/credits');
 
 module.exports = async (req, res) => {
   // Only accept authenticated cron calls

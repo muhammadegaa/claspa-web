@@ -1,4 +1,4 @@
-const { db } = require('./lib/firebase-admin');
+const { db } = require('../lib/firebase-admin');
 
 const FIREBASE_API_KEY = process.env.FIREBASE_API_KEY;
 

@@ -2,12 +2,12 @@
 // credit balance. Called by the extension popup to show "remaining this month"
 // and the exhaustion modal's exact numbers.
 
-const { db } = require('./lib/firebase-admin');
+const { db } = require('../lib/firebase-admin');
 const {
   ensureCreditFields,
   maybeResetMonthly,
   getBalance,
-} = require('./lib/credits');
+} = require('../lib/credits');
 
 async function verifyIdToken(idToken) {
   const FIREBASE_API_KEY = process.env.FIREBASE_API_KEY;

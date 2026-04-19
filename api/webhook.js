@@ -72,7 +72,7 @@ async function handleTopupCompleted(session) {
   }
 
   try {
-    const { addTopup, ensureCreditFields } = require('./lib/credits');
+    const { addTopup, ensureCreditFields } = require('../lib/credits');
     await ensureCreditFields(uid);
     const result = await addTopup(uid, creditsCents, {
       session_id: session.id,
@@ -80,7 +80,7 @@ async function handleTopupCompleted(session) {
     });
     console.log(`Top-up credited: uid=${uid} +${creditsCents}¢ (new topup=${result.balance.topup_cents}¢)`);
     try {
-      const { Events } = require('./lib/analytics');
+      const { Events } = require('../lib/analytics');
       Events.topupPurchased(session.amount_total || 0);
     } catch {}
   } catch (e) {
@@ -129,7 +129,7 @@ async function handleSubscriptionCompleted(session, db) {
 
       // Initialize credit fields for new Pro subscribers
       if (plan === 'pro') {
-        const { PRO_MONTHLY_CREDITS_CENTS } = require('./lib/credits');
+        const { PRO_MONTHLY_CREDITS_CENTS } = require('../lib/credits');
         update.credits_balance_cents = PRO_MONTHLY_CREDITS_CENTS;
         update.credits_included_cents = PRO_MONTHLY_CREDITS_CENTS;
         update.credits_period_start = new Date().toISOString();
@@ -140,7 +140,7 @@ async function handleSubscriptionCompleted(session, db) {
       await db.doc(`users/${uid}`).set(update, { merge: true });
       console.log(`Firestore updated for uid: ${uid}`);
       try {
-        const { Events } = require('./lib/analytics');
+        const { Events } = require('../lib/analytics');
         if (plan === 'pro') Events.proSubscribed();
         else if (plan === 'lifetime') Events.lifetimeBought();
       } catch {}
@@ -173,7 +173,7 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: 'Invalid payload' });
   }
 
-  const { db } = require('./lib/firebase-admin');
+  const { db } = require('../lib/firebase-admin');
 
   try {
     if (event.type === 'checkout.session.completed') {
@@ -231,7 +231,7 @@ module.exports = async (req, res) => {
         console.log(`Firestore user ${doc.id} downgraded to free (topup credits preserved)`);
       }
       try {
-        const { Events } = require('./lib/analytics');
+        const { Events } = require('../lib/analytics');
         Events.subscriptionCancelled();
       } catch {}
     }

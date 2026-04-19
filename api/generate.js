@@ -55,7 +55,7 @@ module.exports = async (req, res) => {
   let tier = null;
   try {
     if (idToken) {
-      const { db } = require('./lib/firebase-admin');
+      const { db } = require('../lib/firebase-admin');
       const FIREBASE_API_KEY = process.env.FIREBASE_API_KEY;
       const verifyRes = await fetch(
         `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${FIREBASE_API_KEY}`,
@@ -99,8 +99,8 @@ module.exports = async (req, res) => {
   let creditsState = null;
   if (CREDITS_ENABLED && uid) {
     try {
-      const { ensureCreditFields, maybeResetMonthly, canAfford, getBalance } = require('./lib/credits');
-      const { estimateMaxCostCents } = require('./lib/model-pricing');
+      const { ensureCreditFields, maybeResetMonthly, canAfford, getBalance } = require('../lib/credits');
+      const { estimateMaxCostCents } = require('../lib/model-pricing');
 
       await ensureCreditFields(uid);
       await maybeResetMonthly(uid);
@@ -114,7 +114,7 @@ module.exports = async (req, res) => {
       const balance = await getBalance(uid);
       if (balance.total_cents < estimateCents) {
         try {
-          const { Events } = require('./lib/analytics');
+          const { Events } = require('../lib/analytics');
           Events.creditsExhausted();
         } catch {}
         return res.status(402).json({
@@ -163,8 +163,8 @@ module.exports = async (req, res) => {
   // ─── Post-call credit deduction (async, after response sent) ───
   if (creditsState) {
     const genId = orData?.id;
-    const { deduct } = require('./lib/credits');
-    const { actualCostCents } = require('./lib/model-pricing');
+    const { deduct } = require('../lib/credits');
+    const { actualCostCents } = require('../lib/model-pricing');
 
     // Run deduction but don't block response on it. We return the AI output
     // immediately; ledger updates happen in background.
@@ -187,7 +187,7 @@ module.exports = async (req, res) => {
           was_estimate: wasEstimate,
         });
         try {
-          const { Events } = require('./lib/analytics');
+          const { Events } = require('../lib/analytics');
           Events.creditsDeducted(costCents);
         } catch {}
       } catch (e) {
